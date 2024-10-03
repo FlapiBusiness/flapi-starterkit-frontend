@@ -30,7 +30,7 @@ jobs:
       - name: Install dependencies for project
         run: npm install
 
-      - name: Lint Eslint and Lint Vue-tsc to App
+      - name: Lint TypeScript and ESLint for project
         run: npm run lint:eslint && npm run lint:ts
 
       - name: Run Unit Tests and E2E Tests

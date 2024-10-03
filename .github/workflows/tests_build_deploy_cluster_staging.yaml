@@ -26,7 +26,7 @@ jobs:
       - name: Build Project for Staging
         run: npm run build:static:staging
 
-      - name: Lint Eslint and Lint Vue-tsc to App
+      - name: Lint TypeScript and ESLint for project
         run: npm run lint:eslint && npm run lint:ts
 
       - name: Run Unit Tests and E2E Tests
