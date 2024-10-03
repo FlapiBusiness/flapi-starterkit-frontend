@@ -9,6 +9,7 @@ export default defineNuxtConfig({
       noscript: [],
     },
   },
+  srcDir: 'src-nuxt', // Directory of your source files
   ssr: false, // Mettre a false pour : desktop (tauri)
   devtools: { enabled: true },
   telemetry: false,
@@ -55,7 +56,7 @@ export default defineNuxtConfig({
     },
   },*/
   pinia: {
-    storesDirs: ['./stores/**'],
+    storesDirs: ['./src-nuxt/stores/**'],
   },
   tailwindcss: {
     exposeConfig: true,
