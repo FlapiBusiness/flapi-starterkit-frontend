@@ -22,7 +22,7 @@ const mainConfig = {
     'src-nuxt/middlewares/**/*.{ts,tsx}',
     'src-nuxt/utils/**/*.{ts,tsx}',
     'src-nuxt/directives/**/*.{ts,tsx}',
-    'src/**/*.{ts,tsx}',
+    'src-core/**/*.{ts,tsx}',
   ],
   plugins: {
     '@typescript-eslint': eslintPluginTypeScript,
