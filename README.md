@@ -85,23 +85,6 @@ git clone git@github.com:FlapiBusiness/MyRepo.git
 
 2. Steps by Platform :
 
-```bash
-# Windows :
-1. Requirements : Windows >= 10
-2. Download and Install WSL2 : https://learn.microsoft.com/fr-fr/windows/wsl/install
-3. Download and Install Docker Desktop : https://docs.docker.com/desktop/install/windows-install/
-
-# macOS :
-1. Requirements : macOS Intel x86_64 or macOS Apple Silicon arm64
-2. Requirements (2) : macOS 11.0 (Big Sur)
-2. Download and Install Docker Desktop : https://docs.docker.com/desktop/install/mac-install/
-
-# Linux (Ubuntu / Debian) :
-1. Requirements : Ubuntu >= 20.04 or Debian >= 10
-2. Download and Install Docker (Ubuntu) : https://docs.docker.com/engine/install/ubuntu/
-3. Download and Install Docker (Debian) : https://docs.docker.com/engine/install/debian/
-```
-
 <br /><br /><br /><br />
 
 ## 🔄 Cycle Development
