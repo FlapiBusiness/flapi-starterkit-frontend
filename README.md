@@ -7,8 +7,8 @@
 - Tauri (Framework for Desktop)
 - Capacitor (Framework for Mobile)
 - CI / CD (Github Actions)
-- Docker / DockerCompose (Develop)
-- Kubernetes (Prod and Staging)
+- Docker / DockerCompose (Development-Local)
+- Kubernetes (Development-Remote, Staging and Production)
 
 <br /><br /><br /><br />
 
