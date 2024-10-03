@@ -17,7 +17,7 @@ export default defineConfig({
   },
   e2e: {
     specPattern: 'tests/e2e/**/*.cy.ts',
-    baseUrl: 'http://localhost:3001',
+    baseUrl: 'http://localhost:1461',
     setupNodeEvents(on, config) {
       on(
         'after:spec',
