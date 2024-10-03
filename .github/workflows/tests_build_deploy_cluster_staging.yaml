@@ -26,9 +26,12 @@ jobs:
       - name: Build Project for Staging
         run: npm run build:static:staging
 
-      - name: Lint TypeScript and Lint Vue-tsc to App
-        run: npm run lint:ts && npm run lint:vue
+      - name: Lint Eslint and Lint Vue-tsc to App
+        run: npm run lint:eslint && npm run lint:ts
 
+      - name: Run Unit Tests and E2E Tests
+        run: npm run test:unit:staging-prod # && npm run test:e2e
+        
       - name: Login to DockerHub
         uses: docker/login-action@v3
         with:
