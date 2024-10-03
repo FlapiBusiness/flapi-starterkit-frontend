@@ -5,8 +5,8 @@
   "build": {
     "frontendDist": "../.output/public/",
     "devUrl": "http://localhost:1460",
-    "beforeDevCommand": "bash src-tauri/scripts/beforeDevCommand.sh",
-    "beforeBuildCommand": "bash src-tauri/scripts/beforeBuildCommand.sh"
+    "beforeDevCommand": "sh src-tauri/scripts/beforeDevCommand.sh",
+    "beforeBuildCommand": "sh src-tauri/scripts/beforeBuildCommand.sh"
   },
   "app": {
     "windows": [
