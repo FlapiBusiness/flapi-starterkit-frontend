@@ -40,6 +40,7 @@ git commit --allow-empty -m "chore: release 1.1.0-rc.0" -m "Release-As: 1.1.0-rc
 <br /><br /><br /><br />
 
 ## 🚀 Conventions de Commit
+
 Nous utilisons les conventions de commit pour maintenir une cohérence dans l'historique du code et faciliter le versionnement automatique avec release-please. Voici les types de commits que nous utilisons, ainsi que leur impact sur le versionnage :
 
 - feat : Introduction d'une nouvelle fonctionnalité pour l'utilisateur. Entraîne une augmentation de la version mineure (par exemple, de 1.0.0 à 1.1.0).
@@ -85,6 +86,7 @@ Pour plus de détails sur les conventions de commit, consultez : [Conventional C
 ## ⚙️ Setup Environment Development
 
 1. Clone the project repository using the following commands :
+
 ```bash
 git clone git@github.com:FlapiBusiness/MyRepo.git
 ```
@@ -116,8 +118,9 @@ git clone git@github.com:FlapiBusiness/MyRepo.git
 2. Run command :
 
 ```bash
-  
+
 ```
+
 <br /><br /><br /><br />
 
 ## 🚀 Production

@@ -13,13 +13,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   telemetry: false,
   components: true,
-  modules: [
-    '@pinia/nuxt',
-    '@nuxt/test-utils/module',
-    '@nuxtjs/sitemap',
-    '@nuxtjs/google-fonts',
-    '@nuxtjs/tailwindcss'
-  ],
+  modules: ['@pinia/nuxt', '@nuxt/test-utils/module', '@nuxtjs/sitemap', '@nuxtjs/google-fonts', '@nuxtjs/tailwindcss'],
   vite: {
     // Vite options tailored for Tauri development and only applied in `tauri dev` or `tauri build`
     // prevent vite from obscuring rust errors
@@ -49,7 +43,7 @@ export default defineNuxtConfig({
         // tell vite to ignore watching `src-tauri`
         ignored: ['**/src-tauri/**'],
       },
-    } as any
+    } as any,
   },
   /*nitro: {
     preset: 'node-cluster',
