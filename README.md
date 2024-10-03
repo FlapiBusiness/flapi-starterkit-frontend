@@ -12,14 +12,6 @@
 
 <br /><br /><br /><br />
 
-## 📚 Domains of different environments
-
-- Production : https://test.crzcommon.com
-- Staging : https://staging.test.crzcommon.com
-- Development-Remote : https://dev.test.crzcommon.com
-
-<br /><br /><br /><br />
-
 ## 📦 Versionning
 
 On utilise la convention SemVer : https://semver.org/lang/fr/ <br /><br />
