@@ -113,6 +113,7 @@ rustup default
 # Pour changer la chaine d'outils par défault utilisé, exemples :
 rustup default stable-x86_64-pc-windows-msvc # Windows x64
 rustup default stable-i686-pc-windows-msvc # Windows x86
+rustup default stable-aarch64-pc-windows-msvc # Windows arm64
 ```
 
 <br />
