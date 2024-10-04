@@ -75,15 +75,222 @@ Pour plus de détails sur les conventions de commit, consultez : [Conventional C
 
 <br /><br /><br /><br />
 
-## ⚙️ Setup Environment Development
+## ⚙️Desktop - Setup Environment Development - Windows
 
-1. Clone the project repository using the following commands :
+1. Download and Install Microsoft Visual Studio 2022 (MSVC >= v143 and Windows SDK >= 10): https://visualstudio.microsoft.com/fr/vs/
+2. Download and Install WebView2 (if windows < 10) : https://developer.microsoft.com/en-us/microsoft-edge/webview2/#download-section
+3. Download and Install Rust version >= 1.81.0 : https://www.rust-lang.org/tools/install
+4. Spécifiquement pour build du ARM64 il faut installer LLVM et ajouté au PATH : https://github.com/llvm/llvm-project/releases
+5. Install NodeJS latest LTS for Nuxt/Tauri :
 
 ```bash
-git clone git@github.com:FlapiBusiness/MyRepo.git
+# nvm
+# nvm install : https://github.com/coreybutler/nvm-windows/releases
+# Install Node.js latest LTS
+nvm install lts && nvm use lts
 ```
 
-2. Steps by Platform :
+6. Install dependencies for Nuxt.js/Tauri
+
+```bash
+ # npm
+ # Install dependencies
+ npm install
+```
+
+7. Install targets rust for build/compile Tauri :
+
+```bash
+npm run desktop:install:target:windows
+```
+
+8. Il y a toujours une chaine d'outils qui est utilisé par défault, c'est celui qui est choisi lors de la compilation
+
+```bash
+# Pour connaitre la chaine d'outils actuellement utilisé :
+rustup default
+
+# Pour changer la chaine d'outils par défault utilisé, exemples :
+rustup default stable-x86_64-pc-windows-msvc # Windows x64
+rustup default stable-i686-pc-windows-msvc # Windows x86
+```
+
+<br />
+
+## ⚙️ Desktop - Setup Environment Development - macOS
+
+1. Setup Command Line Tools :
+
+```bash
+xcode-select --install
+```
+
+2. Download and Install Rust version >= 1.81.0 :
+
+```bash
+#curl
+curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
+```
+
+3. Install NodeJS LTS latest for Nuxt/Tauri :
+
+```bash
+# nvm
+# nvm install : https://github.com/coreybutler/nvm-windows/releases
+# Install Node.js latest LTS
+nvm install lts && nvm use lts
+```
+
+4. Install dependencies for Nuxt/Tauri
+
+```bash
+ # npm
+ # Install dependencies
+ npm install
+```
+
+5. Install targets rust for build/compile Tauri :
+
+```bash
+npm run desktop:install:target:macos
+```
+
+6. Il y a toujours une chaine d'outils qui est utilisé par défault, c'est celui qui est choisi lors de la compilation
+
+```bash
+# Pour connaitre la chaine d'outils actuellement utilisé :
+rustup default
+
+# Pour changer la chaine d'outils par défault utilisé, exemples :
+rustup default stable-x86_64-apple-darwin # macOS Intel x64
+rustup default stable-aarch64-unknown-linux-gnu # macOS Apple Silicon arm64
+```
+
+<br />
+
+## ⚙️ Desktop - Setup Environment Development - Linux
+
+1. Dépendances système (Debian / Ubuntu) :
+
+```bash
+sudo apt update
+sudo apt install -y libwebkit2gtk-4.1-dev \
+  build-essential \
+  curl \
+  wget \
+  file \
+  libxdo-dev \
+  libssl-dev \
+  libayatana-appindicator3-dev \
+  librsvg2-dev \
+  fuse # for .AppImage
+```
+
+2. Install Rust version >= 1.81.0 :
+
+```bash
+#curl
+curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
+```
+
+3. Install NodeJS latest LTS for Nuxt/Tauri :
+
+```bash
+# nvm
+# nvm install : https://github.com/coreybutler/nvm-windows/releases
+# Install Node.js latest LTS
+ nvm install lts && nvm use lts
+```
+
+4. Install dependencies for Nuxt/Tauri
+
+```bash
+ # npm
+ # Install dependencies
+ npm install
+```
+
+5. Install targets rust for build/compile Tauri :
+
+```bash
+npm run desktop:install:target:linux
+```
+
+6. Il y a toujours une chaine d'outils qui est utilisé par défault, c'est celui qui est choisi lors de la compilation
+
+```bash
+# Pour connaitre la chaine d'outils actuellement utilisé :
+rustup default
+
+# Pour changer la chaine d'outils par défault utilisé, exemples :
+rustup default stable-x86_64-unknown-linux-gnu # Linux x64
+rustup default stable-i686-unknown-linux-gnu	# Linux x86
+```
+
+<br /><br />
+
+## ⚙️ Web - Setup Environment Development
+1. Steps by Platform :
+```bash
+# Windows :
+1. Requirements : Windows >= 10
+2. Download and Install WSL2 : https://learn.microsoft.com/fr-fr/windows/wsl/install
+3. Download and Install Docker Desktop : https://docs.docker.com/desktop/install/windows-install/
+
+# macOS :
+1. Requirements : macOS Intel x86_64 or macOS Apple Silicon arm64
+2. Requirements (2) : macOS 11.0 (Big Sur)
+2. Download and Install Docker Desktop : https://docs.docker.com/desktop/install/mac-install/
+
+# Linux (Ubuntu / Debian) :
+1. Requirements : Ubuntu >= 20.04 or Debian >= 10
+2. Download and Install Docker (Ubuntu) : https://docs.docker.com/engine/install/ubuntu/
+3. Download and Install Docker (Debian) : https://docs.docker.com/engine/install/debian/
+```
+
+<br /><br />
+
+## ⚙️ Mobile - Setup Environment Development
+### iOS 
+1. Download and Install `Xcode`
+2. Download and Install `Xcode Command Line Tools`
+```bash
+xcode-select --install
+```
+3. Download and Install `Homebrew`
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+4. Download and Install `Cocoapods`
+```bash
+brew install cocoapods
+```
+### Android
+1. Download and Install `Android Studio` >= 2024.2.1 : https://developer.android.com/studio?hl=fr
+2. Configure SDK Android :
+   1. Ouvrir Android Studio.
+   2. Dans `Android Studio`, cliquez en haut sur `Tools` dans le menu, puis sur `SDK Manager`.
+   3. Une fenetre s'ouvre, ouvrer l'onglet `Languages & Frameworks` puis cliquer sur `Android SDK`.
+   4. Cliquer sur `SDK Platforms` et cocher les cases suivantes :
+      - **Android API 34** :
+         - `Android SDK Platform 34`
+         - `Sources for Android 34`
+         - `Google APIs Intel x86 Atom System Image`
+         - `Google APIs Play Intel x86 Atom System Image`
+   5. Cliquer ensuite sur `SDK Tools` et cocher les cases suivantes :
+      - **Android SDK Build-Tools 35**
+         - `Android SDK Build-Tools 34`
+      - **NDK (Side by side)**
+         - `26.3.11579264`
+      - **Android SDK Command-line Tools**
+         - `11.0`
+      - **CMake**
+         - `3.22.1`
+      - `Android Emulator`
+      - `Android Emulator Hypervisor Driver for AMD Processor`
+      - `Android Emulator Hypervisor Driver for Intel Processor`
+      - `Google USB Driver`
+   6. Puis cliquer sur le boutton `Apply` en bas à droite pour installer les packages.
 
 <br /><br /><br /><br />
 
