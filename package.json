@@ -17,6 +17,7 @@
     "web:preview": "cross-env PORT=1461 nuxt preview --dotenv .env.development",
     "web:analyze": "nuxi analyze --loglevel verbose",
     "web:cleanup": "nuxi cleanup",
+    "web:prepare": "nuxi prepare",
     "mobile:run:android:device:dev": "npm run web:build:static:develop && npx cap copy android --inline && npx cap run android",
     "mobile:run:android:emulator:dev": "npm run web:build:static:develop && npx cap copy android --inline && npx cap sync android && npx cap open android",
     "mobile:run:ios:device:dev": "npm run web:build:static:develop && npx cap copy ios --inline && npx cap run ios",
