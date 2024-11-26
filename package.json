@@ -65,7 +65,7 @@
     "@capacitor/app": "6.0.1",
     "@capacitor/core": "6.1.2",
     "@capacitor/ios": "6.1.2",
-    "@capacitor/splash-screen": "^6.0.2",
+    "@capacitor/splash-screen": "^6.0.3",
     "@pinia/nuxt": "^0.7.0",
     "@tauri-apps/api": "^2.1.1",
     "@tauri-apps/plugin-shell": "^2.0.1",
