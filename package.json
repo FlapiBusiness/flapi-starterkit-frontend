@@ -118,7 +118,7 @@
     "npm-run-all2": "^7.0.1",
     "nuxt": "^3.14.159",
     "postcss": "^8.4.47",
-    "prettier": "^3.3.3",
+    "prettier": "^3.4.1",
     "prettier-plugin-tailwindcss": "^0.6.8",
     "serve": "^14.2.4",
     "typescript": "~5.5.0",
