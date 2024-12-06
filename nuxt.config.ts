@@ -82,5 +82,5 @@ export default defineNuxtConfig({
   },
   image: {
     // Options
-  }
+  },
 })

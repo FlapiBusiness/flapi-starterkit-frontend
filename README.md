@@ -232,7 +232,9 @@ rustup default stable-aarch64-unknown-linux-gnu # Linux arm64
 <br /><br />
 
 ## ⚙️ Web - Setup Environment Development
+
 1. Steps by Platform :
+
 ```bash
 # Windows :
 1. Requirements : Windows >= 10
@@ -253,21 +255,30 @@ rustup default stable-aarch64-unknown-linux-gnu # Linux arm64
 <br /><br />
 
 ## ⚙️ Mobile - Setup Environment Development
-### iOS 
+
+### iOS
+
 1. Download and Install `Xcode`
 2. Download and Install `Xcode Command Line Tools`
+
 ```bash
 xcode-select --install
 ```
+
 3. Download and Install `Homebrew`
+
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
+
 4. Download and Install `Cocoapods`
+
 ```bash
 brew install cocoapods
 ```
+
 ### Android
+
 1. Download and Install `Android Studio` >= 2024.2.1 : https://developer.android.com/studio?hl=fr
 2. Configure SDK Android :
    1. Ouvrir Android Studio.
@@ -275,19 +286,19 @@ brew install cocoapods
    3. Une fenetre s'ouvre, ouvrer l'onglet `Languages & Frameworks` puis cliquer sur `Android SDK`.
    4. Cliquer sur `SDK Platforms` et cocher les cases suivantes :
       - **Android API 34** :
-         - `Android SDK Platform 34`
-         - `Sources for Android 34`
-         - `Google APIs Intel x86 Atom System Image`
-         - `Google APIs Play Intel x86 Atom System Image`
+        - `Android SDK Platform 34`
+        - `Sources for Android 34`
+        - `Google APIs Intel x86 Atom System Image`
+        - `Google APIs Play Intel x86 Atom System Image`
    5. Cliquer ensuite sur `SDK Tools` et cocher les cases suivantes :
       - **Android SDK Build-Tools 35**
-         - `Android SDK Build-Tools 34`
+        - `Android SDK Build-Tools 34`
       - **NDK (Side by side)**
-         - `26.3.11579264`
+        - `26.3.11579264`
       - **Android SDK Command-line Tools**
-         - `11.0`
+        - `11.0`
       - **CMake**
-         - `3.22.1`
+        - `3.22.1`
       - `Android Emulator`
       - `Android Emulator Hypervisor Driver for AMD Processor`
       - `Android Emulator Hypervisor Driver for Intel Processor`

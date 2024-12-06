@@ -182,6 +182,8 @@ const ignoreConfig = {
     '.cache/**',
     'src-tauri/target/**',
     'src-tauri/gen/**',
+    'android/**',
+    'ios/**',
   ],
 }
 
@@ -191,4 +193,10 @@ const ignoreConfig = {
  * Exportation combinée des configurations
  * eslint.config.{js,mjs,cjs} nouvelle syntaxe depuis la version >= 8.57
  */
-export default [mainConfig, ignoreConfig, eslintPluginJSDoc.configs['flat/recommended'], eslintPluginCypress.configs.recommended, eslintConfigPrettier]
+export default [
+  mainConfig,
+  ignoreConfig,
+  eslintPluginJSDoc.configs['flat/recommended'],
+  eslintPluginCypress.configs.recommended,
+  eslintConfigPrettier,
+]
