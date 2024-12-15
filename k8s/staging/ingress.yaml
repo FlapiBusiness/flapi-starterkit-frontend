@@ -1,24 +1,24 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: staging-seatyrants-website-frontend-ingress
-  namespace: staging-seatyrants-website-frontend
+  name: staging-nomduclient-nomduprojet-frontend-ingress
+  namespace: staging-nomduclient-nomduprojet-frontend
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-production
 spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - staging.seatyrants.crzcommon.com
-      secretName: staging-seatyrants-frontend-crzcommon-tls
+        - staging.exemple.flapi.org
+      secretName: staging-nomduclient-nomduprojet-frontend-tls
   rules:
-    - host: staging.seatyrants.crzcommon.com
+    - host: staging.exemple.flapi.org
       http:
         paths:
           - pathType: Prefix
             path: '/'
             backend:
               service:
-                name: staging-seatyrants-website-frontend-service
+                name: staging-nomduclient-nomduprojet-frontend-service
                 port:
                   number: 80

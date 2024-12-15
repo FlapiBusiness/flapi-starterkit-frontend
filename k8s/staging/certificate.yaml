@@ -1,12 +1,12 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: staging-seatyrants-frontend-crzcommon-cert
-  namespace: staging-seatyrants-website-frontend
+  name: staging-nomduclient-nomduprojet-frontend-cert
+  namespace: staging-nomduclient-nomduprojet-frontend
 spec:
-  secretName: staging-seatyrants-frontend-crzcommon-tls
+  secretName: staging-nomduclient-nomduprojet-frontend-tls
   dnsNames:
-    - staging.seatyrants.crzcommon.com
+    - staging.exemple.flapi.org
   issuerRef:
     name: letsencrypt-production
     kind: ClusterIssuer
