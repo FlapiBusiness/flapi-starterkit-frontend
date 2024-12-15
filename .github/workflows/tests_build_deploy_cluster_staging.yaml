@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - staging
+  repository_dispatch:
+    types: [deploy-to-staging]
   workflow_dispatch:
 
 jobs:

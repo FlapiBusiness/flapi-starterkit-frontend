@@ -1,0 +1,53 @@
+name: Init project, Update Files and Push to Develop
+
+on:
+  workflow_dispatch:
+    inputs:
+      nomduclient:
+        description: "Nom du client"
+        required: true
+      nomduprojet:
+        description: "Nom du projet"
+        required: true
+      domaine:
+        description: "Domaine à utiliser"
+        required: true
+
+jobs:
+  update-files:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Modify files
+        run: |
+          # Remplacer "nomduclient-nomduprojet" par le nom du client et du projet
+          sed -i "s/nomduclient-nomduprojet/${{ inputs.nomduclient }}-${{ inputs.nomduprojet }}/g" k8s/*.yaml
+          sed -i "s/exemple/${{ inputs.domaine }}/g" k8s/*.yaml
+
+      - name: Commit changes
+        run: |
+          git fetch origin
+          git add .
+          git commit -m "feat: Mise à jour des fichiers avec ${inputs.nomduclient}-${inputs.nomduprojet}"
+          git push origin develop
+
+      - name: Merge develop into staging
+        run: |
+          git fetch origin
+          git checkout staging
+          git merge origin/develop --no-ff -m "Merge develop into staging"
+          git push origin staging
+
+      - name: Trigger Deploy to Production Workflow
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
+          event-type: deploy-to-staging
