@@ -9,7 +9,7 @@ on:
       nomduprojet:
         description: "Nom du projet"
         required: true
-      domaine:
+      subdomain:
         description: "Domaine à utiliser"
         required: true
 
