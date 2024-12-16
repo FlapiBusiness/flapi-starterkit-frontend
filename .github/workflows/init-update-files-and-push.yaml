@@ -36,7 +36,7 @@ jobs:
         run: |
           git fetch origin
           git add .
-          git commit -m "feat: Mise à jour des fichiers avec ${inputs.nomduclient}-${inputs.nomduprojet}"
+          git commit -m "feat: Mise à jour des fichiers avec ${{ inputs.nomduclient }}-${{ inputs.nomduprojet }}"
           git push origin develop
 
       - name: Merge develop into staging
