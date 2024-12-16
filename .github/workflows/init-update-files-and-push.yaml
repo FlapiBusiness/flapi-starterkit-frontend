@@ -10,7 +10,7 @@ on:
         description: "Nom du projet"
         required: true
       subdomain:
-        description: "Domaine à utiliser"
+        description: "Sous domaine à utiliser"
         required: true
 
 permissions:
