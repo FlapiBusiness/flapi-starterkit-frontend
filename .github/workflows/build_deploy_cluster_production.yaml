@@ -5,6 +5,13 @@ on:
     types:
       - published
   workflow_dispatch:
+    inputs:
+      nomduclient:
+        description: "Nom du client"
+        required: true
+      nomduprojet:
+        description: "Nom du projet"
+        required: true
 
 jobs:
   test_build_deploy:
@@ -29,7 +36,7 @@ jobs:
           context: .
           file: ./docker/production/Dockerfile
           push: true
-          tags: corentin35/nomduclient-nomduprojet-frontend:latest
+          tags: corentin35/${{ inputs.nomduclient }}-${{ inputs.nomduprojet }}-frontend:latest
 
       - name: Build and push Docker image - Production version x.x.x
         uses: docker/build-push-action@v6
@@ -37,7 +44,7 @@ jobs:
           context: .
           file: ./docker/production/Dockerfile
           push: true
-          tags: corentin35/nomduclient-nomduprojet-frontend:${{ steps.previoustag.outputs.tag }}
+          tags: corentin35/${{ inputs.nomduclient }}-${{ inputs.nomduprojet }}-frontend:${{ steps.previoustag.outputs.tag }}
 
       - name: Replace image tag in deployment.yaml for Kubernetes
         run: |
