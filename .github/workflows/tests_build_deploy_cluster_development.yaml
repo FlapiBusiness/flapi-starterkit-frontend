@@ -49,7 +49,7 @@ jobs:
           context: .
           file: ./docker/development/Dockerfile
           push: true
-          tags: corentin35/${{ inputs.nomduclient }}-${{ inputs.nomduprojet }}-frontend:develop-${{ github.sha }}
+          tags: corentin35/${{ github.event.client_payload.nomduclient }}-${{ github.event.client_payload.nomduprojet }}-frontend:develop-${{ github.sha }}
 
       - name: Replace image tag in deployment.yaml for Kubernetes
         run: |
