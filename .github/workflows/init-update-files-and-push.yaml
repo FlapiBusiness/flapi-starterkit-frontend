@@ -38,6 +38,7 @@ jobs:
         run: |
           sed -i "s/nomduclient-nomduprojet/${{ inputs.nomduclient }}-${{ inputs.nomduprojet }}/g" k8s/**/*.yaml
           sed -i "s/example/${{ inputs.subdomain }}/g" k8s/**/*.yaml
+          sed -i "s/nomduclient-nomduprojet/${{ inputs.nomduclient }}-${{ inputs.nomduprojet }}/g" .github/workflows/**/*.yaml
           sed -i "s/example/${{ inputs.subdomain }}/g" .env.*
 
       - name: Commit changes
@@ -58,4 +59,4 @@ jobs:
         uses: peter-evans/repository-dispatch@v3
         with:
           token: ${{ secrets.PAT_TOKEN }}
-          event-type: deploy-to-staging
+          event-type: deploy-to-init-project
