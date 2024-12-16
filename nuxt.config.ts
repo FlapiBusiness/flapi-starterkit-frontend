@@ -10,7 +10,7 @@ export default defineNuxtConfig({
     },
   },
   srcDir: 'src-nuxt', // Directory of your source files
-  ssr: false, // Mettre a false pour : desktop (tauri)
+  ssr: true, // Mettre a false pour : desktop (tauri)
   devtools: { enabled: true },
   telemetry: false,
   components: true,
@@ -21,6 +21,7 @@ export default defineNuxtConfig({
     '@nuxtjs/google-fonts',
     '@nuxtjs/tailwindcss',
     '@nuxt/image',
+    '@nuxtjs/seo',
   ],
   vite: {
     // Vite options tailored for Tauri development and only applied in `tauri dev` or `tauri build`
