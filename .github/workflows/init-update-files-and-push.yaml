@@ -51,7 +51,7 @@ jobs:
         run: |
           git fetch origin
           git checkout staging
-          git merge origin/develop --no-ff -m "Merge develop into staging"
+          git merge origin/develop --no-ff -m "Merge develop into staging" --allow-unrelated-histories
           git push origin staging
 
       - name: Trigger Deploy to Staging Workflow
