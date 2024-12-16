@@ -62,5 +62,5 @@ jobs:
           client-payload: |
             {
               "nomduclient": "${{ inputs.nomduclient }}",
-              "nomduprojet": "${{ inputs.nomduprojet }}",
+              "nomduprojet": "${{ inputs.nomduprojet }}"
             }
