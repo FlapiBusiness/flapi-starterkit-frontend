@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: dev-nomduclient-nomduprojet-frontend-cert
+  namespace: dev-nomduclient-nomduprojet-frontend
+spec:
+  secretName: dev-nomduclient-nomduprojet-frontend-tls
+  dnsNames:
+    - dev.example.flapi.org
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer

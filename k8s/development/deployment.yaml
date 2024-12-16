@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dev-nomduclient-nomduprojet-frontend-deployment
+  namespace: dev-nomduclient-nomduprojet-frontend
+  labels:
+    app: dev-nomduclient-nomduprojet-frontend
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: dev-nomduclient-nomduprojet-frontend
+  template:
+    metadata:
+      labels:
+        app: dev-nomduclient-nomduprojet-frontend
+    spec:
+      containers:
+        - name: dev-nomduclient-nomduprojet-frontend
+          image: corentin35/nomduclient-nomduprojet-frontend:develop-${TAG_VERSION}
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          env:
+            - name: PORT
+              value: '80'
+          resources:
+            requests:
+              cpu: '300m'
+              memory: '400Mi'
+            limits:
+              cpu: '600m'
+              memory: '800Mi'
+      imagePullSecrets:
+        - name: regcred
