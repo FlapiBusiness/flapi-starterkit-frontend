@@ -46,7 +46,7 @@ jobs:
           git merge origin/develop --no-ff -m "Merge develop into staging"
           git push origin staging
 
-      - name: Trigger Deploy to Production Workflow
+      - name: Trigger Deploy to Staging Workflow
         uses: peter-evans/repository-dispatch@v3
         with:
           token: ${{ secrets.PAT_TOKEN }}
