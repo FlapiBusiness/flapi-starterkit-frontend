@@ -13,6 +13,9 @@ on:
         description: "Domaine à utiliser"
         required: true
 
+permissions:
+  contents: write
+
 jobs:
   update-files:
     runs-on: ubuntu-latest
@@ -27,11 +30,8 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: Authenticate with PAT
-        env:
-          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
-          REPOSITORY: ${{ github.repository }}
         run: |
-          git remote set-url origin https://x-access-token:${PAT_TOKEN}@github.com/${REPOSITORY}.git
+          git remote set-url origin https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/${{ github.repository }}
           git remote -v
 
       - name: Modify files
