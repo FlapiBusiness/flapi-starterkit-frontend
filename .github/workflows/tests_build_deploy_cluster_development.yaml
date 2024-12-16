@@ -7,6 +7,13 @@ on:
   repository_dispatch:
     types: [deploy-to-init-project]
   workflow_dispatch:
+    inputs:
+      nomduclient:
+        description: "Nom du client"
+        required: true
+      nomduprojet:
+        description: "Nom du projet"
+        required: true
 
 jobs:
   tests_build_deploy:
@@ -42,7 +49,7 @@ jobs:
           context: .
           file: ./docker/development/Dockerfile
           push: true
-          tags: corentin35/nomduclient-nomduprojet-frontend:develop-${{ github.sha }}
+          tags: corentin35/${{ inputs.nomduclient }}-${{ inputs.nomduprojet }}-frontend:develop-${{ github.sha }}
 
       - name: Replace image tag in deployment.yaml for Kubernetes
         run: |
