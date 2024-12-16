@@ -6,14 +6,6 @@ on:
       - develop
   repository_dispatch:
     types: [deploy-to-init-project]
-  workflow_dispatch:
-    inputs:
-      nomduclient:
-        description: "Nom du client"
-        required: true
-      nomduprojet:
-        description: "Nom du projet"
-        required: true
 
 jobs:
   tests_build_deploy:
