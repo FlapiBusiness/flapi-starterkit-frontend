@@ -9,10 +9,10 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - staging.exemple.flapi.org
+        - staging.example.flapi.org
       secretName: staging-nomduclient-nomduprojet-frontend-tls
   rules:
-    - host: staging.exemple.flapi.org
+    - host: staging.example.flapi.org
       http:
         paths:
           - pathType: Prefix

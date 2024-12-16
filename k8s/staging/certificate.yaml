@@ -6,7 +6,7 @@ metadata:
 spec:
   secretName: staging-nomduclient-nomduprojet-frontend-tls
   dnsNames:
-    - staging.exemple.flapi.org
+    - staging.example.flapi.org
   issuerRef:
     name: letsencrypt-production
     kind: ClusterIssuer
