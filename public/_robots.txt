@@ -1,3 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://exemple.com/sitemap.xml
