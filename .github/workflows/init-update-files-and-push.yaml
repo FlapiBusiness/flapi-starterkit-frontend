@@ -38,7 +38,7 @@ jobs:
         run: |
           sed -i "s/nomduclient-nomduprojet/${{ inputs.nomduclient }}-${{ inputs.nomduprojet }}/g" k8s/**/*.yaml
           sed -i "s/example/${{ inputs.subdomain }}/g" k8s/**/*.yaml
-          sed -i "s/nomduclient-nomduprojet/${{ inputs.nomduclient }}-${{ inputs.nomduprojet }}/g" .github/workflows/**/*.yaml
+          sed -i "s/nomduclient-nomduprojet/${{ inputs.nomduclient }}-${{ inputs.nomduprojet }}/g" .github/workflows/*.yaml
           sed -i "s/example/${{ inputs.subdomain }}/g" .env.*
 
       - name: Commit changes
