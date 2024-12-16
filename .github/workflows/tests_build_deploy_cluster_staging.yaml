@@ -24,10 +24,6 @@ jobs:
       - name: Install dependencies for project
         run: npm install
 
-      # Contrainte de devoir faire ça pour generer le dossier .nuxt avant de pouvoir faire le lint:vue
-      - name: Build Project for Staging
-        run: npm run build:static:staging
-
       - name: Lint TypeScript and ESLint for project
         run: npm run lint:eslint && npm run lint:ts
 

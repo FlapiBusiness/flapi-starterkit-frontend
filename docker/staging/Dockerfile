@@ -11,7 +11,7 @@ RUN npm ci --ignore-scripts
 COPY . .
 
 # Build the application
-RUN npm run build:static:staging
+RUN npm run web:build:static:staging
 
 
 # Second Stage: Setup the runtime
