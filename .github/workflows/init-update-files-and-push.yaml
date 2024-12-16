@@ -29,8 +29,10 @@ jobs:
       - name: Authenticate with PAT
         env:
           PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
+          REPOSITORY: ${{ github.repository }}
         run: |
-          git remote set-url origin https://x-access-token:${PAT_TOKEN}@github.com/${{ github.repository }}
+          git remote set-url origin https://x-access-token:${PAT_TOKEN}@github.com/${REPOSITORY}.git
+          git remote -v
 
       - name: Modify files
         run: |
