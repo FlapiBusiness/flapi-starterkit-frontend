@@ -1,9 +1,6 @@
-name: tests_build_deploy_cluster_development
+name: init-tests_build_deploy_cluster_development-web
 
 on:
-  push:
-    branches:
-      - develop
   repository_dispatch:
     types: [deploy-to-init-project]
 

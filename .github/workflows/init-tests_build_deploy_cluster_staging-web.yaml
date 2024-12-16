@@ -1,9 +1,6 @@
-name: tests_build_deploy_cluster_staging
+name: init-tests_build_deploy_cluster_staging-web
 
 on:
-  push:
-    branches:
-      - staging
   repository_dispatch:
     types: [deploy-to-init-project]
 
