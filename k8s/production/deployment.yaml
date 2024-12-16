@@ -1,12 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: prod-seatyrants-website-frontend-deployment
-  namespace: prod-seatyrants-website-frontend
+  name: prod-nomduclient-nomduprojet-frontend-deployment
+  namespace: prod-nomduclient-nomduprojet-frontend
   labels:
-    app: prod-seatyrants-website-frontend
+    app: prod-nomduclient-nomduprojet-frontend
 spec:
-  replicas: 5
+  replicas: 1
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -14,15 +14,15 @@ spec:
       maxSurge: 1
   selector:
     matchLabels:
-      app: prod-seatyrants-website-frontend
+      app: prod-nomduclient-nomduprojet-frontend
   template:
     metadata:
       labels:
-        app: prod-seatyrants-website-frontend
+        app: prod-nomduclient-nomduprojet-frontend
     spec:
       containers:
-        - name: prod-seatyrants-website-frontend
-          image: corentin35/seatyrants-website-frontend:${TAG_VERSION}
+        - name: prod-nomduclient-nomduprojet-frontend
+          image: corentin35/nomduclient-nomduprojet-frontend:${TAG_VERSION}
           imagePullPolicy: Always
           ports:
             - containerPort: 80

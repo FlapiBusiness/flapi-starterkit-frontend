@@ -1,13 +1,13 @@
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
 metadata:
-  name: prod-seatyrants-website-frontend-hpa
-  namespace: prod-seatyrants-website-frontend
+  name: prod-nomduclient-nomduprojet-frontend-hpa
+  namespace: prod-nomduclient-nomduprojet-frontend
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: prod-seatyrants-website-frontend-deployment
-  minReplicas: 5
-  maxReplicas: 15
-  targetCPUUtilizationPercentage: 50
+    name: prod-nomduclient-nomduprojet-frontend-deployment
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 70
