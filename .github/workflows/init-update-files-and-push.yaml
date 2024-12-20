@@ -3,10 +3,10 @@ name: Init project, Update Files and Push to Develop
 on:
   workflow_dispatch:
     inputs:
-      nomduclient:
+      customerName:
         description: "Nom du client"
         required: true
-      nomduprojet:
+      projectName:
         description: "Nom du projet"
         required: true
       subdomain:
@@ -61,6 +61,6 @@ jobs:
           event-type: deploy-to-init-project
           client-payload: |
             {
-              "nomduclient": "${{ inputs.nomduclient }}",
-              "nomduprojet": "${{ inputs.nomduprojet }}"
+              "customerName": "${{ inputs.customerName }}",
+              "projectName": "${{ inputs.projectName }}"
             }
