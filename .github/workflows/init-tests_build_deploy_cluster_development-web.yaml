@@ -3,6 +3,7 @@ name: init-tests_build_deploy_cluster_development-web
 on:
   repository_dispatch:
     types: [deploy-to-init-project]
+  workflow_dispatch:
 
 jobs:
   tests_build_deploy:
