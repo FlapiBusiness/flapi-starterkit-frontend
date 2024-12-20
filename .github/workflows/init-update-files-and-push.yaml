@@ -36,7 +36,7 @@ jobs:
 
       - name: Modify files
         run: |
-          sed -i "s/nomduclient-nomduprojet/${{ inputs.nomduclient }}-${{ inputs.nomduprojet }}/g" k8s/**/*.yaml
+          sed -i "s/nomduclient-projectName/${{ inputs.customerName }}-${{ inputs.projectName }}/g" k8s/**/*.yaml
           sed -i "s/example/${{ inputs.subdomain }}/g" k8s/**/*.yaml
           sed -i "s/example/${{ inputs.subdomain }}/g" .env.*
 
@@ -44,7 +44,7 @@ jobs:
         run: |
           git fetch origin
           git add .
-          git commit -m "feat: update files with ${{ inputs.nomduclient }}-${{ inputs.nomduprojet }}"
+          git commit -m "feat: update files with ${{ inputs.customerName }}-${{ inputs.projectName }}"
           git push origin develop
 
       - name: Force staging to match develop
