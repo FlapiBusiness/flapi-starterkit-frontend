@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: prod-nomduclient-nomduprojet-frontend-service
-  namespace: prod-nomduclient-nomduprojet-frontend
+  name: prod-customerName-projectName-frontend-service
+  namespace: prod-customerName-projectName-frontend
 spec:
   ports:
     - port: 80
       targetPort: 80
   selector:
-    app: prod-nomduclient-nomduprojet-frontend
+    app: prod-customerName-projectName-frontend

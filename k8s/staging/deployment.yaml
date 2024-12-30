@@ -1,10 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: staging-nomduclient-nomduprojet-frontend-deployment
-  namespace: staging-nomduclient-nomduprojet-frontend
+  name: staging-customerName-projectName-frontend-deployment
+  namespace: staging-customerName-projectName-frontend
   labels:
-    app: staging-nomduclient-nomduprojet-frontend
+    app: staging-customerName-projectName-frontend
 spec:
   replicas: 1
   strategy:
@@ -14,15 +14,15 @@ spec:
       maxSurge: 1
   selector:
     matchLabels:
-      app: staging-nomduclient-nomduprojet-frontend
+      app: staging-customerName-projectName-frontend
   template:
     metadata:
       labels:
-        app: staging-nomduclient-nomduprojet-frontend
+        app: staging-customerName-projectName-frontend
     spec:
       containers:
-        - name: staging-nomduclient-nomduprojet-frontend
-          image: corentin35/nomduclient-nomduprojet-frontend:staging-${TAG_VERSION}
+        - name: staging-customerName-projectName-frontend
+          image: corentin35/customerName-projectName-frontend:staging-${TAG_VERSION}
           imagePullPolicy: Always
           ports:
             - containerPort: 80

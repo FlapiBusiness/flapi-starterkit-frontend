@@ -1,10 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: dev-nomduclient-nomduprojet-frontend-deployment
-  namespace: dev-nomduclient-nomduprojet-frontend
+  name: dev-customerName-projectName-frontend-deployment
+  namespace: dev-customerName-projectName-frontend
   labels:
-    app: dev-nomduclient-nomduprojet-frontend
+    app: dev-customerName-projectName-frontend
 spec:
   replicas: 1
   strategy:
@@ -14,15 +14,15 @@ spec:
       maxSurge: 1
   selector:
     matchLabels:
-      app: dev-nomduclient-nomduprojet-frontend
+      app: dev-customerName-projectName-frontend
   template:
     metadata:
       labels:
-        app: dev-nomduclient-nomduprojet-frontend
+        app: dev-customerName-projectName-frontend
     spec:
       containers:
-        - name: dev-nomduclient-nomduprojet-frontend
-          image: corentin35/nomduclient-nomduprojet-frontend:develop-${TAG_VERSION}
+        - name: dev-customerName-projectName-frontend
+          image: corentin35/customerName-projectName-frontend:develop-${TAG_VERSION}
           imagePullPolicy: Always
           ports:
             - containerPort: 80

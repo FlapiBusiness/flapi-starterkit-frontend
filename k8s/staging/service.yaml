@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: staging-nomduclient-nomduprojet-frontend-service
-  namespace: staging-nomduclient-nomduprojet-frontend
+  name: staging-customerName-projectName-frontend-service
+  namespace: staging-customerName-projectName-frontend
 spec:
   ports:
     - port: 80
       targetPort: 80
   selector:
-    app: staging-nomduclient-nomduprojet-frontend
+    app: staging-customerName-projectName-frontend

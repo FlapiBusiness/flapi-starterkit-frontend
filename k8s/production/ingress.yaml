@@ -1,8 +1,8 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: prod-nomduclient-nomduprojet-frontend-ingress
-  namespace: prod-nomduclient-nomduprojet-frontend
+  name: prod-customerName-projectName-frontend-ingress
+  namespace: prod-customerName-projectName-frontend
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-production
 spec:
@@ -10,7 +10,7 @@ spec:
   tls:
     - hosts:
         - example.flapi.org
-      secretName: prod-nomduclient-nomduprojet-frontend-tls
+      secretName: prod-customerName-projectName-frontend-tls
   rules:
     - host: example.flapi.org
       http:
@@ -19,6 +19,6 @@ spec:
             path: '/'
             backend:
               service:
-                name: prod-nomduclient-nomduprojet-frontend-service
+                name: prod-customerName-projectName-frontend-service
                 port:
                   number: 80

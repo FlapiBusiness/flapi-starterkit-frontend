@@ -36,7 +36,7 @@ jobs:
 
       - name: Modify files
         run: |
-          sed -i "s/nomduclient-projectName/${{ inputs.customerName }}-${{ inputs.projectName }}/g" k8s/**/*.yaml
+          sed -i "s/customerName-projectName/${{ inputs.customerName }}-${{ inputs.projectName }}/g" k8s/**/*.yaml
           sed -i "s/example/${{ inputs.subdomain }}/g" k8s/**/*.yaml
           sed -i "s/example/${{ inputs.subdomain }}/g" .env.*
 

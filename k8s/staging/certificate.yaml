@@ -1,10 +1,10 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: staging-nomduclient-nomduprojet-frontend-cert
-  namespace: staging-nomduclient-nomduprojet-frontend
+  name: staging-customerName-projectName-frontend-cert
+  namespace: staging-customerName-projectName-frontend
 spec:
-  secretName: staging-nomduclient-nomduprojet-frontend-tls
+  secretName: staging-customerName-projectName-frontend-tls
   dnsNames:
     - staging.example.flapi.org
   issuerRef:
