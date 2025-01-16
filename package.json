@@ -70,6 +70,7 @@
     "@tauri-apps/api": "^2.1.1",
     "@tauri-apps/plugin-shell": "^2.2.0",
     "@tauri-apps/plugin-updater": "^2.3.0",
+    "@tuyau/client": "^0.2.2",
     "axios": "^1.7.9",
     "luxon": "^3.5.0",
     "pinia": "^2.3.0",
