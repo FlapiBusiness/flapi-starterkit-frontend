@@ -4,13 +4,13 @@ on:
   workflow_dispatch:
     inputs:
       customerName:
-        description: "Nom du client"
+        description: 'Nom du client'
         required: true
       projectName:
-        description: "Nom du projet"
+        description: 'Nom du projet'
         required: true
       subdomain:
-        description: "Sous domaine à utiliser"
+        description: 'Sous domaine à utiliser'
         required: true
 
 permissions:
