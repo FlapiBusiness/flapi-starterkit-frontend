@@ -111,8 +111,7 @@ npm run desktop:install:target:windows
 rustup default
 
 # Pour changer la chaine d'outils par défault utilisé, exemples :
-rustup default stable-x86_64-pc-windows-msvc # Windows x64
-rustup default stable-i686-pc-windows-msvc # Windows x86
+rustup default stable-x86_64-pc-windows-msvc  # Windows x64
 rustup default stable-aarch64-pc-windows-msvc # Windows arm64
 ```
 
@@ -163,7 +162,7 @@ npm run desktop:install:target:macos
 rustup default
 
 # Pour changer la chaine d'outils par défault utilisé, exemples :
-rustup default stable-x86_64-apple-darwin       # macOS Intel x64
+rustup default stable-x86_64-apple-darwin       # macOS Intel x86_64
 rustup default stable-aarch64-unknown-linux-gnu # macOS Apple Silicon arm64
 ```
 
@@ -225,7 +224,6 @@ rustup default
 
 # Pour changer la chaine d'outils par défault utilisé, exemples :
 rustup default stable-x86_64-unknown-linux-gnu  # Linux x64
-rustup default stable-i686-unknown-linux-gnu	   # Linux x86
 rustup default stable-aarch64-unknown-linux-gnu # Linux arm64
 ```
 
@@ -243,7 +241,7 @@ rustup default stable-aarch64-unknown-linux-gnu # Linux arm64
 
 # macOS :
 1. Requirements : macOS Intel x86_64 or macOS Apple Silicon arm64
-2. Requirements (2) : macOS 11.0 (Big Sur)
+2. Requirements (2) : macOS 11.0 (Big Sur) +
 2. Download and Install Docker Desktop : https://docs.docker.com/desktop/install/mac-install/
 
 # Linux (Ubuntu / Debian) :
@@ -258,7 +256,7 @@ rustup default stable-aarch64-unknown-linux-gnu # Linux arm64
 
 ### iOS
 
-1. Download and Install `Xcode`
+1. Download and Install `Xcode` >= 16.0
 2. Download and Install `Xcode Command Line Tools`
 
 ```bash
@@ -277,10 +275,24 @@ xcode-select --install
 brew install cocoapods
 ```
 
+5. Download and Install Node.js >= 20.0.0
+```bash
+# nvm windows install : https://github.com/coreybutler/nvm-windows/releases
+# Install Node.js latest LTS
+nvm install lts && nvm use lts
+```
+
 ### Android
 
-1. Download and Install `Android Studio` >= 2024.2.1 : https://developer.android.com/studio?hl=fr
-2. Configure SDK Android :
+1. Download and Install Node.js >= 20.0.0
+```bash
+# nvm windows install : https://github.com/coreybutler/nvm-windows/releases
+# Install Node.js latest LTS
+nvm install lts && nvm use lts
+```
+2. Download and Install `Android Studio` >= 2024.2.1 : https://developer.android.com/studio?hl=fr
+3. Java JDK >= 21
+4. Configure SDK Android :
    1. Ouvrir Android Studio.
    2. Dans `Android Studio`, cliquez en haut sur `Tools` dans le menu, puis sur `SDK Manager`.
    3. Une fenetre s'ouvre, ouvrer l'onglet `Languages & Frameworks` puis cliquer sur `Android SDK`.
