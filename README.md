@@ -1,8 +1,8 @@
-# Flapi - StarterKit Frontend
+# Flapi - customerName projectName - Web / Mobile / Desktop
 
 ## 🛠 Tech Stack
 
-- TypeScript (Language)
+- TypeScript, Rust (Language)
 - Nuxt (Framework for Desktop, Mobile and Web)
 - Tauri (Framework for Desktop)
 - Capacitor (Framework for Mobile)
@@ -67,11 +67,22 @@ Pour plus de détails sur les conventions de commit, consultez : [Conventional C
 
 <br /><br /><br /><br />
 
-## 📚 Domains of different environments
+## 📚 Domains of different environments - WebSite
 
-- Production : https://test.crzcommon.com
-- Staging : https://staging.test.crzcommon.com
-- Development-Remote : https://dev.test.crzcommon.com
+- Development-Remote : https://dev.example.flapi.org
+- Staging : https://staging.example.flapi.org
+- Production : https://example.flapi.org
+
+## 📚 URL - Mobile
+
+- AppStore (iOS) :
+- PlayStore (Android)
+
+## 📚 URL App - Desktop
+
+- Windows :
+- macOS :
+- Linux :
 
 <br /><br /><br /><br />
 
@@ -276,6 +287,7 @@ brew install cocoapods
 ```
 
 5. Download and Install Node.js >= 20.0.0
+
 ```bash
 # nvm windows install : https://github.com/coreybutler/nvm-windows/releases
 # Install Node.js latest LTS
@@ -285,11 +297,13 @@ nvm install lts && nvm use lts
 ### Android
 
 1. Download and Install Node.js >= 20.0.0
+
 ```bash
 # nvm windows install : https://github.com/coreybutler/nvm-windows/releases
 # Install Node.js latest LTS
 nvm install lts && nvm use lts
 ```
+
 2. Download and Install `Android Studio` >= 2024.2.1 : https://developer.android.com/studio?hl=fr
 3. Java JDK >= 21
 4. Configure SDK Android :
@@ -321,12 +335,22 @@ nvm install lts && nvm use lts
 
 ## 🔄 Cycle Development
 
+### Desktop
+
+<br />
+
+### Web
+
 1. Open Docker Desktop
 2. Run command :
 
 ```bash
 
 ```
+
+<br />
+
+### Mobile
 
 <br /><br /><br /><br />
 

@@ -1,7 +1,7 @@
 services:
   nuxt:
     container_name: nuxt
-    image: flapi/website-frontend:develop
+    image: flapi/customername-projectname-website-frontend:develop
     restart: always
     build:
       context: .
