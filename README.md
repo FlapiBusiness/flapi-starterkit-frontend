@@ -79,7 +79,7 @@ Pour plus de détails sur les conventions de commit, consultez : [Conventional C
 
 1. Download and Install Microsoft Visual Studio 2022 (MSVC >= v143 and Windows SDK >= 10): https://visualstudio.microsoft.com/fr/vs/
 2. Download and Install WebView2 (if windows < 10) : https://developer.microsoft.com/en-us/microsoft-edge/webview2/#download-section
-3. Download and Install Rust version >= 1.81.0 : https://www.rust-lang.org/tools/install
+3. Download and Install Rust version >= 1.84.0 : https://www.rust-lang.org/tools/install
 4. Spécifiquement pour build du ARM64 il faut installer LLVM et ajouté au PATH : https://github.com/llvm/llvm-project/releases
 5. Install NodeJS latest LTS for Nuxt/Tauri :
 
@@ -125,7 +125,7 @@ rustup default stable-aarch64-pc-windows-msvc # Windows arm64
 xcode-select --install
 ```
 
-2. Download and Install Rust version >= 1.81.0 :
+2. Download and Install Rust version >= 1.84.0 :
 
 ```bash
 #curl
@@ -186,7 +186,7 @@ sudo apt install -y libwebkit2gtk-4.1-dev \
   fuse # for .AppImage
 ```
 
-2. Install Rust version >= 1.81.0 :
+2. Install Rust version >= 1.84.0 :
 
 ```bash
 #curl
