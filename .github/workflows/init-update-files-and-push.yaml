@@ -42,6 +42,7 @@ jobs:
           sed -i "s/example/${{ inputs.subdomain }}/g" .env.*
           sed -i "s/customerName projectName/${{ inputs.customerName }} ${{ inputs.projectName }}/g" README.md
           sed -i "s/example/${{ inputs.subdomain }}/g" README.md
+          sed -i "s/example/${{ inputs.subdomain }}/g" capacitor.config.ts
 
       - name: Commit changes
         run: |
