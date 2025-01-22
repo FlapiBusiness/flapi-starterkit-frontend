@@ -11,7 +11,7 @@ RUN npm ci --ignore-scripts
 COPY . .
 
 # Build the application
-RUN npm run web:build:static:develop
+RUN npm run web:build:static:dev-remote
 
 
 # Second Stage: Setup the runtime

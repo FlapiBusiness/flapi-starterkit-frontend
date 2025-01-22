@@ -1,4 +1,4 @@
-package com.flapi.myapp;
+package com.flapi.example;
 
 import com.getcapacitor.BridgeActivity;
 
