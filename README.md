@@ -75,7 +75,7 @@ Pour plus de détails sur les conventions de commit, consultez : [Conventional C
 
 <br /><br /><br /><br />
 
-## ⚙️Desktop - Setup Environment Development - Windows
+## ⚙️Desktop (Tauri / Nuxt) - Setup Environment Development - Windows
 
 1. Download and Install Microsoft Visual Studio 2022 (MSVC >= v143 and Windows SDK >= 10): https://visualstudio.microsoft.com/fr/vs/
 2. Download and Install WebView2 (if windows < 10) : https://developer.microsoft.com/en-us/microsoft-edge/webview2/#download-section
@@ -117,7 +117,7 @@ rustup default stable-aarch64-pc-windows-msvc # Windows arm64
 
 <br />
 
-## ⚙️ Desktop - Setup Environment Development - macOS
+## ⚙️ Desktop (Tauri / Nuxt) - Setup Environment Development - macOS
 
 1. Setup Command Line Tools :
 
@@ -168,7 +168,7 @@ rustup default stable-aarch64-unknown-linux-gnu # macOS Apple Silicon arm64
 
 <br />
 
-## ⚙️ Desktop - Setup Environment Development - Linux
+## ⚙️ Desktop (Tauri / Nuxt) - Setup Environment Development - Linux
 
 1. Dépendances système (Debian / Ubuntu) :
 
@@ -229,7 +229,7 @@ rustup default stable-aarch64-unknown-linux-gnu # Linux arm64
 
 <br /><br />
 
-## ⚙️ Web - Setup Environment Development
+## ⚙️ Web (Nuxt) - Setup Environment Development - All
 
 1. Steps by Platform :
 
@@ -252,7 +252,7 @@ rustup default stable-aarch64-unknown-linux-gnu # Linux arm64
 
 <br /><br />
 
-## ⚙️ Mobile - Setup Environment Development
+## ⚙️ Mobile (Nuxt / Capacitor) - Setup Environment Development - All
 
 ### iOS
 
