@@ -1,7 +1,7 @@
 {
-  "productName": "Test App",
+  "productName": "ExampleNameApp",
   "version": "0.0.0",
-  "identifier": "com.flapi.testapp",
+  "identifier": "com.flapi.examplenameapp",
   "build": {
     "frontendDist": "../.output/public/",
     "devUrl": "http://localhost:1460",
@@ -26,7 +26,7 @@
     ],
     "macOSPrivateApi": true,
     "security": {
-      "csp": "default-src 'self'; connect-src http://127.0.0.1:3333/ https://staging.api.crzcommon.com https://api.crzcommon.com http://ipc.localhost;",
+      "csp": "default-src 'self'; connect-src http://127.0.0.1:3333/ https://dev.example.api.flapi.org https://staging.example.api.flapi.org https://example.api.flapi.org http://ipc.localhost;",
       "assetProtocol": {
         "enable": false,
         "scope": []
@@ -40,10 +40,10 @@
   },
   "bundle": {
     "active": true,
-    "category": "Application",
+    "category": "ExampleCategoryApplication",
     "copyright": "Flapi",
-    "longDescription": "Test App",
-    "shortDescription": "Test App",
+    "longDescription": "ExampleLongDescriptionApp",
+    "shortDescription": "ExampleShortDescriptionApp",
     "license": "Proprietary",
     "targets": "all",
     "icon": ["icons/32x32.png", "icons/128x128.png", "icons/128x128@2x.png", "icons/icon.icns", "icons/icon.ico"],
@@ -59,7 +59,7 @@
     "macOS": {
       "minimumSystemVersion": "11.0",
       "entitlements": null,
-      "exceptionDomain": "127.0.0.1 staging.api.crzcommon.com api.crzcommon.com",
+      "exceptionDomain": "127.0.0.1 localhost dev.example.api.flapi.org staging.example.api.flapi.org example.api.flapi.org",
       "frameworks": [],
       "providerShortName": null,
       "signingIdentity": null
@@ -79,7 +79,7 @@
         "installMode": "passive"
       },
       "active": true,
-      "endpoints": ["https://api.crzcommon.com/launcher/updater-manifest/{{target}}/{{arch}}/{{current_version}}"],
+      "endpoints": ["https://example.api.flapi.org/updater/updater-manifest/{{target}}/{{arch}}/{{current_version}}"],
       "dialog": false,
       "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDE5NjU0QjdDQTI1Njk4MDYKUldRR21GYWlmRXRsR2Faekh4WGJSeVR4czJkTFZFSzI0enVtaGxxc2dNWm9yZG1nN0ZIU2Q3NXQK"
     }

@@ -1,7 +1,7 @@
 [package]
-name = "flapi-starterkit-frontend"
+name = "flapi-customername-projectname"
 version = "0.0.0"
-description = "Flapi StarterKit FrontEnd"
+description = "Flapi customerName projectName"
 authors = ["corentin recanzone"]
 edition = "2021"
 rust-version = "1.84.0"

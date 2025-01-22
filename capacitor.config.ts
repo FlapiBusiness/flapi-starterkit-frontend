@@ -1,8 +1,8 @@
 import type { CapacitorConfig } from '@capacitor/cli'
 
 const config: CapacitorConfig = {
-  appId: 'com.flapi.example',
-  appName: 'example',
+  appId: 'com.flapi.examplenameapp',
+  appName: 'examplenameapp',
   webDir: 'dist',
   plugins: {
     SplashScreen: {

@@ -12,6 +12,15 @@ on:
       subdomain:
         description: 'Sous domaine à utiliser'
         required: true
+      categoryApp:
+        description: 'Categorie de l'application'
+        required: true
+      longDescriptionApp:
+        description: 'Description longue de l'application'
+        required: true
+      shortDescriptionApp:
+        description: 'Description courte de l'application'
+        required: true
 
 permissions:
   contents: write
@@ -40,10 +49,19 @@ jobs:
           sed -i "s/customername-projectname/${{ inputs.customerName }}-${{ inputs.projectName }}/g" docker-compose.yml
           sed -i "s/example/${{ inputs.subdomain }}/g" k8s/**/*.yaml
           sed -i "s/example/${{ inputs.subdomain }}/g" .env.*
-          sed -i "s/customerName projectName/${{ inputs.customerName }} ${{ inputs.projectName }}/g" README.md
           sed -i "s/example/${{ inputs.subdomain }}/g" README.md
-          sed -i "s/example/${{ inputs.subdomain }}/g" capacitor.config.ts
-
+          sed -i "s/example/${{ inputs.subdomain }}/g" src-tauri/tauri.conf.json
+          sed -i "s/example/${{ inputs.subdomain }}/g" src-tauri/updater.json
+          sed -i "s/customerName projectName/${{ inputs.customerName }} ${{ inputs.projectName }}/g" README.md
+          sed -i "s/customerName projectName/${{ inputs.customerName }} ${{ inputs.projectName }}/g" src-tauri/Cargo.toml
+          sed -i "s/customername-projectname/${{ inputs.customerName }}-${{ inputs.projectName }}/g" src-tauri/Cargo.toml
+          sed -i "s/examplenameapp/${{ inputs.projectName }}/g" capacitor.config.ts
+          sed -i "s/examplenameapp/${{ inputs.projectName }}/g" src-tauri/tauri.conf.json
+          sed -i "s/ExampleNameApp/${{ inputs.projectName }}/g" src-tauri/tauri.conf.json
+          sed -i "s/ExampleLongDescriptionApp/${{ inputs.longDescriptionApp }}/g" src-tauri/tauri.conf.json
+          sed -i "s/ExampleShortDescriptionApp/${{ inputs.shortDescriptionApp }}/g" src-tauri/tauri.conf.json
+          sed -i "s/ExampleCategoryApplication/${{ inputs.categoryApp }}/g" src-tauri/tauri.conf.json
+          
       - name: Commit changes
         run: |
           git fetch origin
