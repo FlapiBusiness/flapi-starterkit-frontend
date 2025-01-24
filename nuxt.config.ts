@@ -21,7 +21,6 @@ export default defineNuxtConfig({
     '@nuxtjs/google-fonts',
     '@nuxtjs/tailwindcss',
     '@nuxt/image',
-    '@nuxtjs/seo',
   ],
   vite: {
     // Vite options tailored for Tauri development and only applied in `tauri dev` or `tauri build`
