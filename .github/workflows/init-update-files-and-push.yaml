@@ -13,13 +13,13 @@ on:
         description: 'Sous domaine à utiliser'
         required: true
       categoryApp:
-        description: 'Categorie de l'application'
+        description: 'Categorie de l application'
         required: true
       longDescriptionApp:
-        description: 'Description longue de l'application'
+        description: 'Description longue de l application'
         required: true
       shortDescriptionApp:
-        description: 'Description courte de l'application'
+        description: 'Description courte de l application'
         required: true
 
 permissions:
@@ -84,5 +84,8 @@ jobs:
           client-payload: |
             {
               "customerName": "${{ inputs.customerName }}",
-              "projectName": "${{ inputs.projectName }}"
+              "projectName": "${{ inputs.projectName }}",
+              "categoryApp": "${{ inputs.categoryApp }}"
+              "longDescriptionApp": "${{ inputs.longDescriptionApp }}"
+              "shortDescriptionApp": "${{ inputs.shortDescriptionApp }}"
             }
