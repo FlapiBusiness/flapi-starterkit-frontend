@@ -80,8 +80,8 @@ jobs:
           security list-keychain -d user -s $KEYCHAIN_PATH
 
           # apply provisioning profile
-          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
-          cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
+          mkdir -p ~/Library/Developer/Xcode/UserData/Provisioning\ Profiles
+          cp $PP_PATH ~/Library/Developer/Xcode/UserData/Provisioning\ Profiles
 
       - name: Setup Xcode and Setup Command Line Tools - iOS
         if: ${{ matrix.platform == 'macos-latest' }}
@@ -95,16 +95,6 @@ jobs:
         run: |
           SDKROOT=$(xcrun --sdk iphoneos --show-sdk-path)
           echo "SDKROOT=$SDKROOT" >> $GITHUB_ENV
-
-      - name: List available SDKs
-        if: ${{ matrix.platform == 'macos-latest' }}
-        run: xcodebuild -showsdks
-
-      - name: Set DEVELOPMENT_TEAM in Xcode project
-        if: ${{ matrix.platform == 'macos-latest' }}
-        run: |
-          PBXPROJ_PATH="ios/App/App.xcodeproj/project.pbxproj"
-          sed -i '' 's/DEVELOPMENT_TEAM = "";$/DEVELOPMENT_TEAM = "'${{ secrets.APPLE_TEAM_ID }}'";/' "$PBXPROJ_PATH"
 
       - name: Build with Capacitor - iOS
         if: ${{ matrix.platform == 'macos-latest' }}
