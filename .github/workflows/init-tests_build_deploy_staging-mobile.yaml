@@ -55,8 +55,8 @@ jobs:
           # Mot de passe du certificat apple au format p12
           IOSMACOS_APPLE_CERTIFICATE_APPLEDISTRIBUTION_P12_PASSWORD: ${{ secrets.IOSMACOS_APPLE_CERTIFICATE_APPLEDISTRIBUTION_P12_PASSWORD }}
           # Profil de provisionnement Apple au format : *.mobileprovision encodé en base64
-          # TODO: A modifier pour chaque nouvelle application iOS pour : secrets.IOS_APPLE_PROVISIONING_PROFILE_APPLEDISTRIBUTION_TESTEXE_BASE64
-          IOSMACOS_APPLE_PROVISIONING_PROFILE_APPLEDISTRIBUTION_BASE64: ${{ secrets.IOS_APPLE_PROVISIONING_PROFILE_APPLEDISTRIBUTION_TESTEXE_BASE64 }}
+          # TODO: A modifier pour chaque nouvelle application iOS pour : secrets.IOS_APPLE_PROVISIONING_PROFILE_APPLEDISTRIBUTION_FLAPIEXAMPLEAPP_BASE64
+          IOSMACOS_APPLE_PROVISIONING_PROFILE_APPLEDISTRIBUTION_BASE64: ${{ secrets.IOS_APPLE_PROVISIONING_PROFILE_APPLEDISTRIBUTION_FLAPIEXAMPLEAPP_BASE64 }}
           # Un nouveau trousseau sera créé sur le coureur, de sorte que le mot de passe du nouveau trousseau, peut être n'importe quelle nouvelle chaîne aléatoire
           APPLE_KEYCHAIN_PASSWORD: ${{ secrets.APPLE_KEYCHAIN_PASSWORD }}
         run: |
