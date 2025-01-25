@@ -96,6 +96,12 @@ jobs:
           SDKROOT=$(xcrun --sdk iphoneos --show-sdk-path)
           echo "SDKROOT=$SDKROOT" >> $GITHUB_ENV
 
+      - name: Set DEVELOPMENT_TEAM in Xcode project
+        run: |
+          npx cap sync ios
+          PBXPROJ_PATH="ios/App/App.xcodeproj/project.pbxproj"
+          sed -i '' 's/DEVELOPMENT_TEAM = "";$/DEVELOPMENT_TEAM = "'${{ secrets.APPLE_TEAM_ID }}'";/' "$PBXPROJ_PATH"
+
       - name: Build with Capacitor - iOS
         if: ${{ matrix.platform == 'macos-latest' }}
         run: npm run mobile:build:ios:staging && ls -la
