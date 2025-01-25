@@ -97,6 +97,7 @@ jobs:
           echo "SDKROOT=$SDKROOT" >> $GITHUB_ENV
 
       - name: Set DEVELOPMENT_TEAM in Xcode project
+        if: ${{ matrix.platform == 'macos-latest' }}
         run: |
           npx cap sync ios
           PBXPROJ_PATH="ios/App/App.xcodeproj/project.pbxproj"
