@@ -99,7 +99,6 @@ jobs:
       - name: Set DEVELOPMENT_TEAM in Xcode project
         if: ${{ matrix.platform == 'macos-latest' }}
         run: |
-          npx cap sync ios
           PBXPROJ_PATH="ios/App/App.xcodeproj/project.pbxproj"
           sed -i '' 's/DEVELOPMENT_TEAM = "";$/DEVELOPMENT_TEAM = "'${{ secrets.APPLE_TEAM_ID }}'";/' "$PBXPROJ_PATH"
 
