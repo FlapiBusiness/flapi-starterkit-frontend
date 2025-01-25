@@ -96,6 +96,10 @@ jobs:
           SDKROOT=$(xcrun --sdk iphoneos --show-sdk-path)
           echo "SDKROOT=$SDKROOT" >> $GITHUB_ENV
 
+      - name: List available SDKs
+        if: ${{ matrix.platform == 'macos-latest' }}
+        run: xcodebuild -showsdks
+
       - name: Set DEVELOPMENT_TEAM in Xcode project
         if: ${{ matrix.platform == 'macos-latest' }}
         run: |
