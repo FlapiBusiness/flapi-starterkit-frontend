@@ -79,8 +79,8 @@ jobs:
           security list-keychain -d user -s $KEYCHAIN_PATH
 
           # apply provisioning profile
-          mkdir -p ~/Library/Developer/Xcode/UserData/Provisioning\ Profiles
-          cp $PP_PATH ~/Library/Developer/Xcode/UserData/Provisioning\ Profiles
+          mkdir -p ~/Library/Developer/Xcode/UserData/Provisioning Profiles
+          cp $PP_PATH ~/Library/Developer/Xcode/UserData/Provisioning Profiles
 
       - name: Setup Xcode and Setup Command Line Tools - iOS
         if: ${{ matrix.platform == 'macos-latest' }}
