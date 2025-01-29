@@ -40,7 +40,6 @@ jobs:
         run: |
           chmod +x android/gradlew
           npm run mobile:build:android:staging -- \
-          --flavor staging \
           --keystorepath android.keystore \
           --keystorepass "$ANDROID_KEYSTORE_PASSWORD" \
           --keystorealias "$ANDROID_KEYSTORE_ALIAS_NAME" \
