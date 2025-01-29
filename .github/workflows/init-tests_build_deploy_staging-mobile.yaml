@@ -39,12 +39,12 @@ jobs:
       #- name: Build with Capacitor, Generate AAB and Sign - Android
       #  if: ${{ matrix.platform == 'ubuntu-latest' }}
       #  run: |
-          #    npm run mobile:build:android:staging -- \
-          #    --flavor staging \
-          #    --keystorepath android.keystore \
-          #    --keystorepass ${{ secrets.ANDROID_KEYSTORE_PASSWORD }} \
-          #    --keystorealias ${{ secrets.ANDROID_KEYSTORE_ALIAS_NAME }} \
-          #    --keystorealiaspass ${{ secrets.ANDROID_KEYSTORE_KEY_PASSWORD }} \
+      #    npm run mobile:build:android:staging -- \
+      #    --flavor staging \
+      #    --keystorepath android.keystore \
+      #    --keystorepass ${{ secrets.ANDROID_KEYSTORE_PASSWORD }} \
+      #    --keystorealias ${{ secrets.ANDROID_KEYSTORE_ALIAS_NAME }} \
+      #    --keystorealiaspass ${{ secrets.ANDROID_KEYSTORE_KEY_PASSWORD }} \
       #    --androidreleasetype AAB
 
       - name: Install the Apple Certificate and Provisioning Profile (Apple Distribution) - AppStore / TestFlight - iOS
@@ -112,7 +112,7 @@ jobs:
           # Create Payload directory and move .app into it
           mkdir Payload
           cp -a path/to/*.app Payload/
-          
+
           # Recuperer le nom du fichier .app pour avoir le même nom pour le .ipa, puis zip le Payload dans un .ipa
           APP_NAME=$(basename Payload/*.app .app)
           zip -ry $APP_NAME.ipa Payload/

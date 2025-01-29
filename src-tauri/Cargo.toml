@@ -8,17 +8,23 @@ rust-version = "1.84.0"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+[lib]
+# The `_lib` suffix may seem redundant but it is necessary
+# to make the lib name unique and wouldn't conflict with the bin name.
+# This seems to be only an issue on Windows, see https://github.com/rust-lang/cargo/issues/8519
+name = "projectName_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
 [build-dependencies]
 tauri-build = { version = "2.0.5", features = [] }
 
 [dependencies]
-tauri = { version = "2.2.3", features = ["macos-private-api"] }
-tauri-plugin-shell = "2.2.0"
+tauri = { version = "2.2.5", features = ["macos-private-api"] }
 serde = { version = "1.0.217", features = ["derive"] }
 serde_json = "1.0.137"
 
 [target."cfg(not(any(target_os = \"android\", target_os = \"ios\")))".dependencies]
-tauri-plugin-updater = "2.3.1"
+tauri-plugin-updater = "2.4.0"
 
 # Server development
 [profile.dev]

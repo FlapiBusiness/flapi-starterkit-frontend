@@ -61,7 +61,7 @@ jobs:
           sed -i "s/ExampleLongDescriptionApp/${{ inputs.longDescriptionApp }}/g" src-tauri/tauri.conf.json
           sed -i "s/ExampleShortDescriptionApp/${{ inputs.shortDescriptionApp }}/g" src-tauri/tauri.conf.json
           sed -i "s/ExampleCategoryApplication/${{ inputs.categoryApp }}/g" src-tauri/tauri.conf.json
-          
+
       - name: Commit changes
         run: |
           git fetch origin

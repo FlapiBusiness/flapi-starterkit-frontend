@@ -3,7 +3,7 @@ import type { CapacitorConfig } from '@capacitor/cli'
 const config: CapacitorConfig = {
   appId: 'org.flapi.examplenameapp',
   appName: 'examplenameapp',
-  webDir: 'dist',
+  webDir: '.output/public',
   plugins: {
     SplashScreen: {
       launchShowDuration: 3000,

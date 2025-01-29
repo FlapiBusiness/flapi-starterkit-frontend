@@ -9,8 +9,10 @@ export default defineNuxtConfig({
       noscript: [],
     },
   },
-  srcDir: 'src-nuxt', // Directory of your source files
-  ssr: true, // Mettre a false pour : desktop (tauri)
+  // Directory of your source files
+  srcDir: 'src-nuxt',
+  // Mettre a false pour SSR : desktop (tauri) et mobile (capacitor)
+  ssr: process.env.NUXT_SSR === 'true',
   devtools: { enabled: true },
   telemetry: false,
   components: true,
@@ -21,7 +23,14 @@ export default defineNuxtConfig({
     '@nuxtjs/google-fonts',
     '@nuxtjs/tailwindcss',
     '@nuxt/image',
+    '@nuxtjs/robots',
+    '@nuxtjs/sitemap',
+    'nuxt-seo-utils',
   ],
+  // Enables the development server to be discoverable by other devices when running on iOS physical devices
+  devServer: { 
+    host: process.env.TAURI_DEV_HOST || 'localhost' 
+  },
   vite: {
     // Vite options tailored for Tauri development and only applied in `tauri dev` or `tauri build`
     // prevent vite from obscuring rust errors
@@ -53,21 +62,14 @@ export default defineNuxtConfig({
       },
     } as any,
   },
-  /*nitro: {
-    preset: 'node-cluster',
-
-    // Configurations optionnelles spécifiques au mode cluster
-    config: {
-      // Nombre de workers dans le cluster (par défaut, utilise tous les cœurs disponibles)
-      workers: process.env.NITRO_CLUSTER_WORKERS || require('os').cpus().length,
-    },
-  },*/
   pinia: {
     storesDirs: ['./src-nuxt/stores/**'],
   },
   tailwindcss: {
     exposeConfig: true,
     viewer: true,
+    // Chemin vers le fichier CSS de Tailwind
+    cssPath: 'src-nuxt/assets/css/tailwind.css',
   },
   postcss: {
     plugins: {

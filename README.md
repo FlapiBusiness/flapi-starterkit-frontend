@@ -305,29 +305,23 @@ nvm install lts && nvm use lts
 ```
 
 2. Download and Install `Android Studio` >= 2024.2.1 : https://developer.android.com/studio?hl=fr
-3. Java JDK >= 21
+3. Java JDK >= 21 : https://www.oracle.com/fr/java/technologies/downloads/#jdk21-windows
 4. Configure SDK Android :
    1. Ouvrir Android Studio.
    2. Dans `Android Studio`, cliquez en haut sur `Tools` dans le menu, puis sur `SDK Manager`.
    3. Une fenetre s'ouvre, ouvrer l'onglet `Languages & Frameworks` puis cliquer sur `Android SDK`.
    4. Cliquer sur `SDK Platforms` et cocher les cases suivantes :
-      - **Android API 34** :
-        - `Android SDK Platform 34`
-        - `Sources for Android 34`
-        - `Google APIs Intel x86 Atom System Image`
-        - `Google APIs Play Intel x86 Atom System Image`
+      - **Android API 35** :
+        - `Android SDK Platform 35`
+        - `Sources for Android 35`
    5. Cliquer ensuite sur `SDK Tools` et cocher les cases suivantes :
-      - **Android SDK Build-Tools 35**
-        - `Android SDK Build-Tools 34`
+      - **Android SDK Build-Tools**
+        - `35.0.1`
       - **NDK (Side by side)**
-        - `26.3.11579264`
+        - `28.0.12916984`
       - **Android SDK Command-line Tools**
-        - `11.0`
-      - **CMake**
-        - `3.22.1`
+        - `17.0`
       - `Android Emulator`
-      - `Android Emulator Hypervisor Driver for AMD Processor`
-      - `Android Emulator Hypervisor Driver for Intel Processor`
       - `Google USB Driver`
    6. Puis cliquer sur le boutton `Apply` en bas à droite pour installer les packages.
 
@@ -336,6 +330,10 @@ nvm install lts && nvm use lts
 ## 🔄 Cycle Development
 
 ### Desktop
+
+```bash
+
+```
 
 <br />
 
@@ -351,6 +349,10 @@ nvm install lts && nvm use lts
 <br />
 
 ### Mobile
+
+```bash
+
+```
 
 <br /><br /><br /><br />
 

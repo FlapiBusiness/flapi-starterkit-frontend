@@ -21,4 +21,4 @@ spec:
               service:
                 name: staging-customerName-projectName-frontend-service
                 port:
-                  number: 80
+                  number: 3000
