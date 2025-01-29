@@ -31,20 +31,19 @@ jobs:
       - name: Run Unit Tests and E2E Tests
         run: npm run test:unit:staging # && npm run test:e2e
 
-      - name: Decode Keystore and create file .keystore for Sign AAB after - Android
-        if: ${{ matrix.platform == 'ubuntu-latest' }}
-        run: |
-          echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 -d > android.keystore
-
       - name: Build with Capacitor, Generate AAB and Sign - Android
         if: ${{ matrix.platform == 'ubuntu-latest' }}
+        env:
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEYSTORE_ALIAS_NAME: ${{ secrets.ANDROID_KEYSTORE_ALIAS_NAME }}
+          ANDROID_KEYSTORE_KEY_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_KEY_PASSWORD }}
         run: |
           npm run mobile:build:android:staging -- \
           --flavor staging \
           --keystorepath android.keystore \
-          --keystorepass ${{ secrets.ANDROID_KEYSTORE_PASSWORD }} \
-          --keystorealias ${{ secrets.ANDROID_KEYSTORE_ALIAS_NAME }} \
-          --keystorealiaspass ${{ secrets.ANDROID_KEYSTORE_KEY_PASSWORD }} \
+          --keystorepass "$ANDROID_KEYSTORE_PASSWORD" \
+          --keystorealias "$ANDROID_KEYSTORE_ALIAS_NAME" \
+          --keystorealiaspass "$ANDROID_KEYSTORE_KEY_PASSWORD" \
           --androidreleasetype AAB
 
       - name: Install the Apple Certificate and Provisioning Profile (Apple Distribution) - AppStore / TestFlight - iOS
