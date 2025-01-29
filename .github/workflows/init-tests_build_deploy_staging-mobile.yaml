@@ -29,7 +29,7 @@ jobs:
         run: npm run lint:eslint && npm run lint:ts
 
       - name: Run Unit Tests and E2E Tests
-        run: npm run test:unit:staging-prod # && npm run test:e2e
+        run: npm run test:unit:staging # && npm run test:e2e
 
       - name: Decode Keystore and create file .keystore for Sign AAB after - Android
         if: ${{ matrix.platform == 'ubuntu-latest' }}
