@@ -90,13 +90,11 @@ jobs:
         with:
           xcode-version: '16.2.0'
 
-      - name: Determine SDK Path and set SDKROOT - iOS
-        if: ${{ matrix.platform == 'macos-latest' }}
-        run: |
-          SDKROOT=$(xcrun --sdk iphoneos --show-sdk-path)
-          echo "SDKROOT=$SDKROOT" >> $GITHUB_ENV
-          xcodebuild -showsdks
-          xcrun --sdk iphoneos --show-sdk-path
+     # - name: Determine SDK Path and set SDKROOT - iOS
+     #   if: ${{ matrix.platform == 'macos-latest' }}
+     #   run: |
+     #    SDKROOT=$(xcrun --sdk iphoneos --show-sdk-path)
+     #     echo "SDKROOT=$SDKROOT" >> $GITHUB_ENV
 
       - name: Build with Capacitor - iOS
         if: ${{ matrix.platform == 'macos-latest' }}
