@@ -104,7 +104,7 @@ jobs:
 
       - name: Build with Capacitor - iOS
         if: ${{ matrix.platform == 'macos-latest' }}
-        run: npm run mobile:build:ios:staging && ls -la
+        run: xcodebuild -workspace './ios/App/App.xcworkspace' -scheme App -destination generic/platform=iOS -archivePath App.xcarchive archive && ls -la
 
       - name: Verify if .app is signed - iOS
         if: ${{ matrix.platform == 'macos-latest' }}
