@@ -99,9 +99,8 @@ jobs:
         if: ${{ matrix.platform == 'macos-latest' }}
         run: |
           cd ios/App
-          /usr/libexec/PlistBuddy -c "Set :ProvisioningStyle Manual" App.xcodeproj/project.pbxproj
-          /usr/libexec/PlistBuddy -c "Set :DEVELOPMENT_TEAM ${{ secrets.APPLE_TEAM_ID }}" App.xcodeproj/project.pbxproj
-          /usr/libexec/PlistBuddy -c "Set :CODE_SIGN_IDENTITY Apple Distribution" App.xcodeproj/project.pbxproj
+          sed -i '' 's/CODE_SIGN_STYLE = Automatic;/CODE_SIGN_STYLE = Manual;/g' App.xcodeproj/project.pbxproj
+          sed -i '' 's/DevelopmentTeam = "";$/DevelopmentTeam = "${{ secrets.APPLE_TEAM_ID }}";/g' App.xcodeproj/project.pbxproj
 
       - name: Verify Xcode signing settings
         if: ${{ matrix.platform == 'macos-latest' }}
