@@ -102,12 +102,6 @@ jobs:
           sed -i '' 's/CODE_SIGN_STYLE = Automatic;/CODE_SIGN_STYLE = Manual;/g' App.xcodeproj/project.pbxproj
           sed -i '' 's/DevelopmentTeam = "";$/DevelopmentTeam = "${{ secrets.APPLE_TEAM_ID }}";/g' App.xcodeproj/project.pbxproj
 
-      - name: Verify Xcode signing settings
-        if: ${{ matrix.platform == 'macos-latest' }}
-        run: |
-          cd ios/App
-          xcodebuild -workspace App.xcworkspace -scheme App -showBuildSettings | grep -E 'DEVELOPMENT_TEAM'
-
       - name: Build with Capacitor - iOS
         if: ${{ matrix.platform == 'macos-latest' }}
         run: npm run mobile:build:ios:staging && ls -la
