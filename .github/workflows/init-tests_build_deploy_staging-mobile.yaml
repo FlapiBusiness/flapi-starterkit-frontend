@@ -87,7 +87,7 @@ jobs:
         # https://github.com/actions/runner-images/blob/main/images/macos/macos-14-Readme.md
         uses: maxim-lobanov/setup-xcode@v1
         with:
-          xcode-version: '16.2.0'
+          xcode-version: '16.1.0'
 
      # - name: Determine SDK Path and set SDKROOT - iOS
      #   if: ${{ matrix.platform == 'macos-latest' }}
