@@ -67,18 +67,18 @@ Pour plus de détails sur les conventions de commit, consultez : [Conventional C
 
 <br /><br /><br /><br />
 
-## 📚 Domains of different environments - WebSite
+## 📚 Application URL to domains of different environments - WebSite
 
 - Development-Remote : https://dev.example.flapi.org
 - Staging : https://staging.example.flapi.org
 - Production : https://example.flapi.org
 
-## 📚 URL - Mobile
+## 📚 Applicatin URL - Mobile
 
 - AppStore (iOS) :
 - PlayStore (Android)
 
-## 📚 URL App - Desktop
+## 📚 Application URL - Desktop
 
 - Windows :
 - macOS :

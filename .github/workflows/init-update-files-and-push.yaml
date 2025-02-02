@@ -55,9 +55,12 @@ jobs:
           sed -i "s/customerName projectName/${{ inputs.customerName }} ${{ inputs.projectName }}/g" README.md
           sed -i "s/customerName projectName/${{ inputs.customerName }} ${{ inputs.projectName }}/g" src-tauri/Cargo.toml
           sed -i "s/customername-projectname/${{ inputs.customerName }}-${{ inputs.projectName }}/g" src-tauri/Cargo.toml
+          sed -i "s/projectname/${{ inputs.projectName }}/g" src-tauri/Cargo.toml
+          sed -i "s/projectname/${{ inputs.projectName }}/g" src-tauri/src/main.rs
           sed -i "s/examplenameapp/${{ inputs.projectName }}/g" capacitor.config.ts
           sed -i "s/examplenameapp/${{ inputs.projectName }}/g" src-tauri/tauri.conf.json
           sed -i "s/ExampleNameApp/${{ inputs.projectName }}/g" src-tauri/tauri.conf.json
+          sed -i "s/ExampleNameApp/${{ inputs.projectName }}/g" src-tauri/updater.json
           sed -i "s/ExampleLongDescriptionApp/${{ inputs.longDescriptionApp }}/g" src-tauri/tauri.conf.json
           sed -i "s/ExampleShortDescriptionApp/${{ inputs.shortDescriptionApp }}/g" src-tauri/tauri.conf.json
           sed -i "s/ExampleCategoryApplication/${{ inputs.categoryApp }}/g" src-tauri/tauri.conf.json

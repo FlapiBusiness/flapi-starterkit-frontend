@@ -26,10 +26,11 @@ export default defineNuxtConfig({
     '@nuxtjs/robots',
     '@nuxtjs/sitemap',
     'nuxt-seo-utils',
+    '@flapi/cms-designsystem',
   ],
   // Enables the development server to be discoverable by other devices when running on iOS physical devices
-  devServer: { 
-    host: process.env.TAURI_DEV_HOST || 'localhost' 
+  devServer: {
+    host: process.env.TAURI_DEV_HOST || 'localhost',
   },
   vite: {
     // Vite options tailored for Tauri development and only applied in `tauri dev` or `tauri build`

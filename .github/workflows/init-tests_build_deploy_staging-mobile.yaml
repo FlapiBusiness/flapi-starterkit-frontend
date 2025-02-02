@@ -31,7 +31,55 @@ jobs:
       - name: Run Unit Tests and E2E Tests
         run: npm run test:unit:staging # && npm run test:e2e
 
-      - name: Build with Capacitor, Generate AAB and Sign - Android
+      - name: Setup Java JDK latest LTS - Android
+        if: ${{ matrix.platform == 'ubuntu-latest' }}
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21.0.6'
+          distribution: 'oracle'
+          cache: 'gradle'
+
+      - name: Read current version from version.txt and append branch and commit hash - Android
+        if: ${{ matrix.platform == 'ubuntu-latest' }}
+        run: |
+          VERSION_BASE=$(cat version.txt)
+
+          # Check if VERSION_BASE is empty and set default value if necessary
+          if [ -z "$VERSION_BASE" ]; then
+            VERSION_BASE="1.0.0"
+          fi
+
+          # Get the current branch name
+          BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
+
+          # Convert branch name to lowercase and replace '/' with '-'
+          BRANCH_NAME=$(echo "$BRANCH_NAME" | tr '[:upper:]' '[:lower:]' | sed 's/\//-/g')
+
+          # Get the short commit SHA (first 7 characters)
+          COMMIT_SHA=$(git rev-parse --short HEAD)
+
+          # Construct the new version string
+          FULL_VERSION="$VERSION_BASE-$BRANCH_NAME.$COMMIT_SHA"
+
+          echo "APP_VERSION=$FULL_VERSION" >> $GITHUB_ENV
+
+      - name: Set variables environment for versionCode and versionName - Android
+        if: ${{ matrix.platform == 'ubuntu-latest' }}
+        run: |
+          # Génère le versionCode en divisant le timestamp UNIX par 100 pour avoir un nombre plus petit
+          # Ne doit pas dépasser 2100000000 (versionCode max pour Android)
+          # Cela signifie que vous pourriez techniquement produire un nouveau build toutes les 1 minute et 40 secondes 
+          # sans que deux builds consécutifs n'aient le même versionCode.
+          TIMESTAMP=$(date +%s)
+          VERSION_CODE=$(($TIMESTAMP / 100))
+          echo "ANDROID_VERSION_CODE=$VERSION_CODE" >> $GITHUB_ENV 
+          echo "ANDROID_VERSION_NAME=$APP_VERSION" >> $GITHUB_ENV
+
+      - name: Decode Keystore and create file .keystore for Sign APK/AAB after - Android
+        if: ${{ matrix.platform == 'ubuntu-latest' }}
+        run: echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 --decode > android.keystore
+
+      - name: Build with Capacitor, Generate AAB/APK and Sign - Android
         if: ${{ matrix.platform == 'ubuntu-latest' }}
         env:
           ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
@@ -45,6 +93,12 @@ jobs:
           --keystorealias "$ANDROID_KEYSTORE_ALIAS_NAME" \
           --keystorealiaspass "$ANDROID_KEYSTORE_KEY_PASSWORD" \
           --androidreleasetype AAB
+          npm run mobile:build:android:staging -- \
+          --keystorepath android.keystore \
+          --keystorepass "$ANDROID_KEYSTORE_PASSWORD" \
+          --keystorealias "$ANDROID_KEYSTORE_ALIAS_NAME" \
+          --keystorealiaspass "$ANDROID_KEYSTORE_KEY_PASSWORD" \
+          --androidreleasetype APK
 
       - name: Install the Apple Certificate and Provisioning Profile (Apple Distribution) - AppStore / TestFlight - iOS
         if: ${{ matrix.platform == 'macos-latest' }}
@@ -89,11 +143,11 @@ jobs:
         with:
           xcode-version: '16.2.0'
 
-     # - name: Determine SDK Path and set SDKROOT - iOS
-     #   if: ${{ matrix.platform == 'macos-latest' }}
-     #   run: |
-     #    SDKROOT=$(xcrun --sdk iphoneos --show-sdk-path)
-     #     echo "SDKROOT=$SDKROOT" >> $GITHUB_ENV
+      # - name: Determine SDK Path and set SDKROOT - iOS
+      #   if: ${{ matrix.platform == 'macos-latest' }}
+      #   run: |
+      #    SDKROOT=$(xcrun --sdk iphoneos --show-sdk-path)
+      #     echo "SDKROOT=$SDKROOT" >> $GITHUB_ENV
 
       - name: Disable automatic signing in Xcode project
         if: ${{ matrix.platform == 'macos-latest' }}

@@ -24,6 +24,7 @@ const mainConfig = {
     'src-nuxt/utils/**/*.{ts,tsx}',
     'src-nuxt/directives/**/*.{ts,tsx}',
     'src-core/**/*.{ts,tsx}',
+    'src-tauri/scripts/**/*.{ts,tsx}',
   ],
   plugins: {
     '@typescript-eslint': eslintPluginTypeScript,
@@ -146,7 +147,7 @@ const mainConfig = {
     'import/resolver': {
       typescript: {
         alwaysTryTypes: true,
-        project: ['./tsconfig.json', './tsconfig.app.json'],
+        project: ['./tsconfig.json'],
       },
     },
   },
@@ -155,7 +156,7 @@ const mainConfig = {
     parserOptions: {
       extraFileExtensions: ['.vue'],
       parser: eslintParserTypeScript,
-      project: ['./tsconfig.json', './tsconfig.app.json'],
+      project: ['./tsconfig.json'],
       ecmaVersion: 'latest',
       sourceType: 'module',
     },
