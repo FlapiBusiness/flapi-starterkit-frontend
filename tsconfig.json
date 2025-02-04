@@ -14,5 +14,9 @@
     "cypress.config.ts",
     "capacitor.config.ts",
     "app.config.ts"
-  ]
+  ],
+  "exclude": [
+    "dist",
+    "node_modules",
+  ],
 }
