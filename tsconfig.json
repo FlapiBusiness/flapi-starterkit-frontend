@@ -13,7 +13,8 @@
     "nuxt.config.ts",
     "cypress.config.ts",
     "capacitor.config.ts",
-    "app.config.ts"
+    "app.config.ts",
+    "app.vue",
   ],
   "exclude": [
     "dist",
