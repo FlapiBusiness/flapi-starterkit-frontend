@@ -20,7 +20,7 @@ const mainConfig = {
     'src-nuxt/stores/**/*.{ts,tsx}',
     'src-nuxt/plugins/**/*.{ts,tsx}',
     'src-nuxt/layouts/**/*.vue',
-    'src-nuxt/middlewares/**/*.{ts,tsx}',
+    'src-nuxt/middleware/**/*.{ts,tsx}',
     'src-nuxt/utils/**/*.{ts,tsx}',
     'src-nuxt/directives/**/*.{ts,tsx}',
     'src-core/**/*.{ts,tsx}',
