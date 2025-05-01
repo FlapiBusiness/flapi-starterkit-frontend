@@ -144,11 +144,11 @@
     "vue-router": "^4.5.0"
   },
   "devDependencies": {
+    "@flapi/cms-designsystem": "^1.2.0",
     "@capacitor/assets": "^3.0.5",
     "@capacitor/cli": "^7.0.1",
     "@commitlint/cli": "^19.7.1",
     "@commitlint/config-conventional": "^19.7.1",
-    "@flapi/cms-designsystem": "^1.0.4",
     "@nuxt/devtools": "^1.7.0",
     "@nuxt/image": "^1.9.0",
     "@nuxt/test-utils": "^3.15.4",

@@ -9,13 +9,17 @@ export default defineNuxtConfig({
       noscript: [],
     },
   },
+
   // Directory of your source files
   srcDir: 'src-nuxt',
+
   // Mettre a false pour SSR : desktop (tauri) et mobile (capacitor)
   ssr: process.env.NUXT_SSR === 'true',
+
   devtools: { enabled: true },
   telemetry: false,
   components: true,
+
   modules: [
     '@pinia/nuxt',
     '@nuxt/test-utils/module',
@@ -28,10 +32,12 @@ export default defineNuxtConfig({
     'nuxt-seo-utils',
     '@flapi/cms-designsystem',
   ],
+
   // Enables the development server to be discoverable by other devices when running on iOS physical devices
   devServer: {
     host: process.env.TAURI_DEV_HOST || 'localhost',
   },
+
   vite: {
     // Vite options tailored for Tauri development and only applied in `tauri dev` or `tauri build`
     // prevent vite from obscuring rust errors
@@ -63,27 +69,34 @@ export default defineNuxtConfig({
       },
     } as any,
   },
+
   pinia: {
     storesDirs: ['./src-nuxt/stores/**'],
   },
+
   tailwindcss: {
     exposeConfig: true,
     viewer: true,
     // Chemin vers le fichier CSS de Tailwind
     cssPath: 'src-nuxt/assets/css/tailwind.css',
   },
+
   postcss: {
     plugins: {
       tailwindcss: {},
       autoprefixer: {},
     },
   },
+
   googleFonts: {
     families: {
       Poppins: true,
     },
   },
+
   image: {
     // Options
   },
+
+  compatibilityDate: '2025-05-01',
 })
