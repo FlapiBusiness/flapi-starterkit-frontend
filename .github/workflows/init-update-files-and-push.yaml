@@ -88,7 +88,7 @@ jobs:
             {
               "customerName": "${{ inputs.customerName }}",
               "projectName": "${{ inputs.projectName }}",
-              "categoryApp": "${{ inputs.categoryApp }}"
-              "longDescriptionApp": "${{ inputs.longDescriptionApp }}"
+              "categoryApp": "${{ inputs.categoryApp }}",
+              "longDescriptionApp": "${{ inputs.longDescriptionApp }}",
               "shortDescriptionApp": "${{ inputs.shortDescriptionApp }}"
             }
