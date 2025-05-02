@@ -13,7 +13,13 @@
 import type { FlapiCmsComponent } from '@/stores/flapiCmsComponentStore'
 import { componentDisplayMap } from '@/components/sections/componentDisplayMap'
 
-const flapiCmsComponents: FlapiCmsComponent[] = localStorage.getItem('flapiCmsComponents')
-  ? JSON.parse(localStorage.getItem('flapiCmsComponents') as string)
-  : []
+const flapiCmsComponents: Ref<FlapiCmsComponent[]> = ref([])
+
+onMounted(() => {
+  if (typeof window !== 'undefined') {
+    flapiCmsComponents.value = localStorage.getItem('flapiCmsComponents')
+      ? JSON.parse(localStorage.getItem('flapiCmsComponents') as string)
+      : []
+  }
+})
 </script>
