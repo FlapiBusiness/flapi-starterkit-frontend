@@ -5,9 +5,15 @@
       <slot />
     </div>
 
-    <BaseModal v-model="isOpen">
+    <BaseModal v-model="isFooterSectionOpen">
+      <FotterSectionForm @submit="" />
+    </BaseModal>
+
+    <BaseModal v-model="isHeroSectionOpen">
       <HeroSectionForm @submit="addFlapiCmsComponent($event)" />
     </BaseModal>
+
+    <!-- Flapi CMS Publish Button -->
     <div class="fixed right-8 top-8 z-50">
       <FlapiButton @click="publishFlapiCmsComponents"> Publier la page </FlapiButton>
     </div>
@@ -20,12 +26,15 @@ import type { FlapiComponentCardProps } from '@/components/card/ComponentCard.vu
 import { useFlapiCmsComponentStore } from '@/stores/flapiCmsComponentStore'
 import type { FlapiCmsComponent } from '@/stores/flapiCmsComponentStore'
 import HeroSectionForm from '~/components/froms/HeroSectionForm.vue'
+import FotterSectionForm from '~/components/froms/FotterSectionForm.vue'
 import BaseModal from '@/components/ui/BaseModal.vue'
 import { ref } from 'vue'
 import type { Ref } from 'vue'
 import type { HeroSectionPayload } from '~/components/froms/HeroSectionForm.vue'
 
-const isOpen: Ref<boolean> = ref(false)
+// const isOpen: Ref<boolean> = ref(false)
+const isHeroSectionOpen: Ref<boolean> = ref(false)
+const isFooterSectionOpen: Ref<boolean> = ref(false)
 const currentComponent: Ref<FlapiComponentCardProps | null> = ref(null)
 
 const flapiCmsComponentStore: ReturnType<typeof useFlapiCmsComponentStore> = useFlapiCmsComponentStore()
@@ -38,7 +47,17 @@ const triggerFlapiCmsComponent: (component: FlapiComponentCardProps) => void = (
   component: FlapiComponentCardProps,
 ): void => {
   currentComponent.value = component
-  isOpen.value = true
+
+  switch (component.type) {
+    case 'FlapiHeroSection':
+      isHeroSectionOpen.value = true
+      break
+    case 'FlapiFooterSection':
+      isFooterSectionOpen.value = true
+      break
+    default:
+      console.warn('Unknown component type:', component.type)
+  }
 }
 
 /**
@@ -62,7 +81,7 @@ const addFlapiCmsComponent: (component: HeroSectionPayload) => void = (component
     page_slug: '/',
   })
 
-  isOpen.value = false
+  isHeroSectionOpen.value = false
   currentComponent.value = null
 }
 

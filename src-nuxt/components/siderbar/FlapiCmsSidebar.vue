@@ -31,6 +31,10 @@ const flapiComponents: FlapiComponentCardProps[] = [
     label: 'Section',
     type: 'FlapiHeroSection',
   },
+  {
+    label: 'Footer',
+    type: 'FlapiFooterSection',
+  },
 ]
 
 const emit: (event: 'select', component: FlapiComponentCardProps) => void = defineEmits<{
