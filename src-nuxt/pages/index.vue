@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="flapiCmsComponents.length">
     <FlapiHeroComponent
       v-for="component in flapiCmsComponents"
       :title="component.data.title as string"
@@ -13,10 +13,18 @@
 </template>
 
 <script lang="ts" setup>
+import { ref } from 'vue'
+import type { Ref } from 'vue'
 import type { FlapiCmsComponent } from '@/stores/flapiCmsComponentStore'
 import FlapiHeroComponent from '@/components/sections/FlapiHeroSection.vue'
 
-const flapiCmsComponents: FlapiCmsComponent[] = localStorage.getItem('flapiCmsComponents')
-  ? JSON.parse(localStorage.getItem('flapiCmsComponents') as string)
-  : []
+const flapiCmsComponents: Ref<FlapiCmsComponent[]> = ref([])
+
+onMounted(() => {
+  if (typeof window !== 'undefined') {
+    flapiCmsComponents.value = localStorage.getItem('flapiCmsComponents')
+      ? JSON.parse(localStorage.getItem('flapiCmsComponents') as string)
+      : []
+  }
+})
 </script>

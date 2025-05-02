@@ -68,7 +68,9 @@ export const useFlapiCmsComponentStore: ReturnType<
        */
       publishFlapiCmsComponents(): void {
         // save the components to lacal storage
-        localStorage.setItem('flapiCmsComponents', JSON.stringify(this.components))
+        if (typeof window !== 'undefined') {
+          localStorage.setItem('flapiCmsComponents', JSON.stringify(this.components))
+        }
       },
     },
   },
