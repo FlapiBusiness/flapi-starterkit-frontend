@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col gap-4">
+  <div class="flex w-full min-w-[576px] max-w-xl flex-col gap-4">
     <FlapiInput
       v-model:value="values.title"
       label="Titre de la section"

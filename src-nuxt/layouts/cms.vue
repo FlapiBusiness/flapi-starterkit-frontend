@@ -1,13 +1,15 @@
 <template>
   <div class="grid min-h-screen w-full grid-cols-[auto,1fr] overflow-x-hidden">
     <FlapiCmsSidebar @select="triggerFlapiCmsComponent($event)" />
+
     <div class="px-4">
       <slot />
     </div>
 
-    <BaseModal v-model="isOpen">
-      <HeroSectionForm @submit="addFlapiCmsComponent($event)" />
+    <BaseModal v-model="isModalOpen">
+      <component :is="activeFormComponent" v-if="activeFormComponent" @submit="addFlapiCmsComponent" />
     </BaseModal>
+
     <div class="fixed right-8 top-8 z-50">
       <FlapiButton @click="publishFlapiCmsComponents"> Publier la page </FlapiButton>
     </div>
@@ -15,20 +17,38 @@
 </template>
 
 <script lang="ts" setup>
-import FlapiCmsSidebar from '@/components/siderbar/FlapiCmsSidebar.vue'
-import type { FlapiComponentCardProps } from '@/components/card/ComponentCard.vue'
+import { ref } from 'vue'
+import type { Ref, ComputedRef } from 'vue'
+
+// Store
 import { useFlapiCmsComponentStore } from '@/stores/flapiCmsComponentStore'
 import type { FlapiCmsComponent } from '@/stores/flapiCmsComponentStore'
+
+// Components
+import FlapiCmsSidebar from '@/components/siderbar/FlapiCmsSidebar.vue'
 import HeroSectionForm from '~/components/froms/HeroSectionForm.vue'
+import FooterSectionForm from '~/components/froms/FooterSectionForm.vue'
 import BaseModal from '@/components/ui/BaseModal.vue'
-import { ref } from 'vue'
-import type { Ref } from 'vue'
+import type { FlapiComponentCardProps } from '@/components/card/ComponentCard.vue'
 import type { HeroSectionPayload } from '~/components/froms/HeroSectionForm.vue'
 
-const isOpen: Ref<boolean> = ref(false)
+// Store
+const flapiCmsComponentStore: ReturnType<typeof useFlapiCmsComponentStore> = useFlapiCmsComponentStore()
+
+// Ref
+const isModalOpen: Ref<boolean> = ref(false)
 const currentComponent: Ref<FlapiComponentCardProps | null> = ref(null)
 
-const flapiCmsComponentStore: ReturnType<typeof useFlapiCmsComponentStore> = useFlapiCmsComponentStore()
+const componentFormMap: Record<string, any> = {
+  FlapiHeroSection: HeroSectionForm,
+  FlapiFooterSection: FooterSectionForm,
+  // add more types here
+}
+
+const activeFormComponent: ComputedRef = computed(() => {
+  return currentComponent.value?.type ? componentFormMap[currentComponent.value.type] : null
+})
+
 /**
  * This function triggers the Flapi CMS component modal.
  * @returns {void}
@@ -38,7 +58,7 @@ const triggerFlapiCmsComponent: (component: FlapiComponentCardProps) => void = (
   component: FlapiComponentCardProps,
 ): void => {
   currentComponent.value = component
-  isOpen.value = true
+  isModalOpen.value = true
 }
 
 /**
@@ -62,7 +82,7 @@ const addFlapiCmsComponent: (component: HeroSectionPayload) => void = (component
     page_slug: '/',
   })
 
-  isOpen.value = false
+  isModalOpen.value = false
   currentComponent.value = null
 }
 

@@ -1,22 +1,17 @@
 <template>
-  <div v-if="flapiCmsComponents.length">
-    <FlapiHeroComponent
-      v-for="component in flapiCmsComponents"
-      :title="component.data.title as string"
-      :content="component.data.content as string"
-      :imageUrl="component.data.imageUrl as string"
-      :showImage="component.data.showImage as boolean"
-      :showButton="component.data.showButton as boolean"
-      :buttonLabel="component.data.buttonLabel as string"
-    ></FlapiHeroComponent>
+  <div>
+    <component
+      v-for="(component, index) in flapiCmsComponents"
+      :key="index"
+      :is="componentDisplayMap[component.type]"
+      v-bind="component.data"
+    />
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
-import type { Ref } from 'vue'
 import type { FlapiCmsComponent } from '@/stores/flapiCmsComponentStore'
-import FlapiHeroComponent from '@/components/sections/FlapiHeroSection.vue'
+import { componentDisplayMap } from '@/components/sections/componentDisplayMap'
 
 const flapiCmsComponents: Ref<FlapiCmsComponent[]> = ref([])
 
