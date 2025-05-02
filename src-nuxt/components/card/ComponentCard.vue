@@ -1,33 +1,28 @@
 <template>
-  <div @click="emitSelect()" class="card">
-    <h1>{{ props.label }}</h1>
-    <!-- <p>Type: {{ props.type }}</p> -->
-    <p v-if="props.icon">Icon: {{ props.icon }}</p>
-
-    <FlapiIcon
-      v-if="props.icon"
-      color="#fff"
-      :height="24"
-      mode="stroke"
-      :name="props.icon"
-      viewBox="0 0 24 24"
-      :width="24"
-    />
+  <div
+    class="flex h-[170px] w-[170px] cursor-pointer flex-col items-start justify-center rounded-2xl border-[3px] border-transparent bg-gray-300 p-4 transition hover:border-primary-300"
+    @click="emit('select', props)"
+  >
+    <div class="flex w-full flex-col items-center">
+      <img :name="label" :src="props.imageUrl" :alt="props.label" />
+      <p class="mt-4 text-center text-base font-semibold text-light-400">
+        {{ label }}
+      </p>
+    </div>
   </div>
 </template>
-
 <script lang="ts" setup>
 /**
  * @description
  * This is the model value for the select field.
  * @property {string} label - The label of the component.
  * @property {string} type - The type of the component.
- * @property {string} [icon] - The icon of the component.
+ * @property {string} [imageUrl] - The imageUrl of the component.
  */
-type FlapiComponentCardProps = {
+export type FlapiComponentCardProps = {
   label: string
   type: string
-  icon?: string
+  imageUrl?: string
 }
 
 const props: FlapiComponentCardProps = defineProps({
@@ -39,19 +34,13 @@ const props: FlapiComponentCardProps = defineProps({
     type: String,
     required: true,
   },
-  icon: {
+  imageUrl: {
     type: String,
-    default: '',
+    default: 'https://placehold.co/600x400',
   },
 })
 
-const emit: (event: 'select', ...args: any[]) => void = defineEmits(['select'])
-
-/**
- * @description
- * This function is used to emit the click event.
- */
-const emitSelect: () => void = () => {
-  emit('select', props.type)
-}
+const emit: (event: 'select', component: FlapiComponentCardProps) => void = defineEmits<{
+  (event: 'select', component: FlapiComponentCardProps): void
+}>()
 </script>

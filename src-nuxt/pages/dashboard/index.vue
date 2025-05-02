@@ -1,38 +1,41 @@
 <template>
-  <FlapiSelect
-    id="select-field"
-    label="Select an Option"
-    :modelValue="modelValue"
-    :options="options"
-    :required="false"
-  />
+  <div>
+    <FlapiHeroSection
+      v-for="component in flapiCmsComponents"
+      :key="component.order"
+      :title="component.data.title as string"
+      :content="component.data.content as string"
+      :imageUrl="component.data.imageUrl as string"
+      :showImage="component.data.showImage as boolean"
+      :showButton="component.data.showButton as boolean"
+      :buttonLabel="component.data.buttonLabel as string"
+    ></FlapiHeroSection>
+  </div>
 </template>
 
 <script lang="ts" setup>
-import type { SelectOption } from '@flapi/cms-designsystem/core'
-/**
- * @description
- * This is the model value for the select field.
- */
-export type ModelValue = {
-  label: string
-  value: string
-}
+import { useFlapiCmsComponentStore } from '@/stores/flapiCmsComponentStore'
+import type { FlapiCmsComponent } from '@/stores/flapiCmsComponentStore'
+import FlapiHeroSection from '@/components/sections/FlapiHeroSection.vue'
 
-const modelValue: ModelValue = { label: 'Option 1', value: 'option1' }
+import type { Ref } from 'vue'
+import { ref } from 'vue'
 
-const options: SelectOption[] = [
-  {
-    label: 'Option 1',
-    value: 'option1',
-  },
-  {
-    label: 'Option 2',
-    value: 'option2',
-  },
-  {
-    label: 'Option 3',
-    value: 'option3',
-  },
-]
+definePageMeta({
+  layout: 'cms',
+})
+
+const flapiCmsComponentStore: ReturnType<typeof useFlapiCmsComponentStore> = useFlapiCmsComponentStore()
+const flapiCmsComponents: Ref<FlapiCmsComponent[]> = ref(flapiCmsComponentStore.components)
+
+onMounted(() => {
+  const published: FlapiCmsComponent[] = localStorage.getItem('flapiCmsComponents')
+    ? JSON.parse(localStorage.getItem('flapiCmsComponents') as string)
+    : []
+
+  console.log('Published components:', published)
+
+  flapiCmsComponentStore.setFlapiCmsComponents(published)
+  flapiCmsComponents.value = published
+})
 </script>
