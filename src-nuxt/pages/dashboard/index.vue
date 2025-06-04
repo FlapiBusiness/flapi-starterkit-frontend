@@ -1,6 +1,6 @@
 <template>
   <div
-    v-for="(component, index) in flapiCmsComponents"
+    v-for="(component, index) in cmsComponents"
     :key="index"
     draggable="true"
     @dragstart="onDragStart(index)"
@@ -23,13 +23,13 @@
       <FlapiIcon color="#fff" :height="24" mode="stroke" name="Trash2" viewBox="0 0 24 24" :width="24" />
     </FlapiSquareButton>
 
-    <component :is="componentDisplayMap[component.type]" v-bind="component.data" />
+    <component :is="componentDisplayMap[component.name]" v-bind="component.data" />
   </div>
 </template>
 
 <script lang="ts" setup>
-import { useFlapiCmsComponentStore } from '@/stores/flapiCmsComponentStore'
-import type { FlapiCmsComponent } from '@/stores/flapiCmsComponentStore'
+import { useCmsComponentStore } from '~/stores/cmsComponentStore'
+import type { CmsComponentStore } from '~/stores/cmsComponentStore'
 import { componentDisplayMap } from '@/components/sections/componentDisplayMap'
 
 import type { Ref } from 'vue'
@@ -39,20 +39,20 @@ definePageMeta({
   layout: 'cms',
 })
 
-const flapiCmsComponentStore: ReturnType<typeof useFlapiCmsComponentStore> = useFlapiCmsComponentStore()
-const flapiCmsComponents: Ref<FlapiCmsComponent[]> = ref(flapiCmsComponentStore.components)
+const cmsComponentStore: ReturnType<typeof useCmsComponentStore> = useCmsComponentStore()
+const cmsComponents: Ref<CmsComponentStore[]> = ref(cmsComponentStore.components)
 const hoveredIndex: Ref<number | null> = ref(null)
 let draggedIndex: number = -1
 
 onMounted(() => {
-  const published: FlapiCmsComponent[] = localStorage.getItem('flapiCmsComponents')
-    ? JSON.parse(localStorage.getItem('flapiCmsComponents') as string)
+  const published: CmsComponentStore[] = localStorage.getItem('cmsComponents')
+    ? JSON.parse(localStorage.getItem('cmsComponents') as string)
     : []
 
   console.log('Published components:', published)
 
-  flapiCmsComponentStore.setFlapiCmsComponents(published)
-  flapiCmsComponents.value = published
+  cmsComponentStore.setCmsComponentStores(published)
+  cmsComponents.value = published
 })
 /**
  * @param {number} index - The index of the component being dragged.
@@ -69,14 +69,14 @@ const onDragStart: (index: number) => void = (index: number): void => {
  * @description This function handles the drop event and reorders the components.
  */
 const onDrop: (dropIndex: number) => void = (dropIndex: number): void => {
-  const items: FlapiCmsComponent[] = [...flapiCmsComponents.value]
-  const draggedItem: FlapiCmsComponent = items.splice(draggedIndex, 1)[0]
+  const items: CmsComponentStore[] = [...cmsComponents.value]
+  const draggedItem: CmsComponentStore = items.splice(draggedIndex, 1)[0]
   items.splice(dropIndex, 0, draggedItem)
 
   // Réaffecte les ordres
-  items.forEach((item: FlapiCmsComponent, index: number) => (item.order = index + 1))
-  flapiCmsComponents.value = items
-  flapiCmsComponentStore.setFlapiCmsComponents(items)
+  items.forEach((item: CmsComponentStore, index: number) => (item.order = index + 1))
+  cmsComponents.value = items
+  cmsComponentStore.setCmsComponentStores(items)
 
   hoveredIndex.value = null
 }
@@ -93,8 +93,8 @@ const onDragLeave: () => void = (): void => {
  * @returns {void}
  */
 const removeComponent: (index: number) => void = (index: number): void => {
-  flapiCmsComponents.value.splice(index, 1)
-  flapiCmsComponents.value.forEach((item: FlapiCmsComponent, i: number) => (item.order = i + 1))
-  flapiCmsComponentStore.setFlapiCmsComponents(flapiCmsComponents.value)
+  cmsComponents.value.splice(index, 1)
+  cmsComponents.value.forEach((item: CmsComponentStore, i: number) => (item.order = i + 1))
+  cmsComponentStore.setCmsComponentStores(cmsComponents.value)
 }
 </script>

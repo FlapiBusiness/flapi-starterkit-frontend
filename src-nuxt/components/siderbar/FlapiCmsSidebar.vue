@@ -9,9 +9,9 @@
           <div class="m-4 grid grid-cols-2 items-center gap-4">
             <FlapiComponentCard
               v-for="component in flapiComponents"
-              :key="component.type"
+              :key="component.name"
               :label="component.label"
-              :type="component.type"
+              :name="component.name"
               :imageUrl="component.imageUrl"
               @select="emit('select', component)"
             />
@@ -24,6 +24,8 @@
               :props="component.props"
               :category="component.category"
               :slots="component.slots"
+              :events="component.events"
+              @select="emit('select', component)"
             />
           </div>
         </div>
@@ -36,24 +38,24 @@
 import FlapiComponentCard from '@/components/card/ComponentCard.vue'
 import FlapiCmsComponentCard from '../card/FlapiCmsComponentCard.vue'
 import type { FlapiComponentCardProps } from '@/components/card/ComponentCard.vue'
+import type { FlapiCmsComponentCardProps } from '../card/FlapiCmsComponentCard.vue'
 import type { FlapiCmsComponent } from '~/composables/type/FlapiCmsComponent'
 const { getAllComponents } = useComponentsMeta()
 
 const flapiCmsComponents: FlapiCmsComponent[] = getAllComponents()
-console.log('allComponents', flapiCmsComponents)
 
 const flapiComponents: FlapiComponentCardProps[] = [
   {
     label: 'Section',
-    type: 'FlapiHeroSection',
+    name: 'FlapiHeroSection',
   },
   {
     label: 'Footer',
-    type: 'FlapiFooterSection',
+    name: 'FlapiFooterSection',
   },
 ]
 
-const emit: (event: 'select', component: FlapiComponentCardProps) => void = defineEmits<{
-  (event: 'select', component: FlapiComponentCardProps): void
+const emit: (event: 'select', component: FlapiComponentCardProps | FlapiCmsComponentCardProps) => void = defineEmits<{
+  (event: 'select', component: FlapiComponentCardProps | FlapiCmsComponentCardProps): void
 }>()
 </script>

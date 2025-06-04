@@ -3,17 +3,17 @@
     <component
       v-for="(component, index) in flapiCmsComponents"
       :key="index"
-      :is="componentDisplayMap[component.type]"
+      :is="componentDisplayMap[component.name]"
       v-bind="component.data"
     />
   </div>
 </template>
 
 <script lang="ts" setup>
-import type { FlapiCmsComponent } from '@/stores/flapiCmsComponentStore'
+import type { CmsComponentStore } from '~/stores/cmsComponentStore'
 import { componentDisplayMap } from '@/components/sections/componentDisplayMap'
 
-const flapiCmsComponents: Ref<FlapiCmsComponent[]> = ref([])
+const flapiCmsComponents: Ref<CmsComponentStore[]> = ref([])
 
 onMounted(() => {
   if (typeof window !== 'undefined') {

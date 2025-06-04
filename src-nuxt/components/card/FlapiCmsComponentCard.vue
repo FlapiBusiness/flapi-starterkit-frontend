@@ -49,7 +49,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { Prop, Slot } from '~/composables/type/FlapiCmsComponent'
+import type { Prop, Slot, Event } from '~/composables/type/FlapiCmsComponent'
 /**
  * @description
  * This is the model value for the Flapi CMS component card.
