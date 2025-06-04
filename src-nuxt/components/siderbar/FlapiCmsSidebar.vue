@@ -15,6 +15,16 @@
               :imageUrl="component.imageUrl"
               @select="emit('select', component)"
             />
+            <!-- <p class="text-white">Flapi CMS</p> -->
+            <FlapiCmsComponentCard
+              v-for="component in flapiCmsComponents"
+              :key="component.name"
+              :name="component.name"
+              :description="component.description"
+              :props="component.props"
+              :category="component.category"
+              :slots="component.slots"
+            />
           </div>
         </div>
       </div>
@@ -24,7 +34,13 @@
 
 <script lang="ts" setup>
 import FlapiComponentCard from '@/components/card/ComponentCard.vue'
+import FlapiCmsComponentCard from '../card/FlapiCmsComponentCard.vue'
 import type { FlapiComponentCardProps } from '@/components/card/ComponentCard.vue'
+import type { FlapiCmsComponent } from '~/composables/type/FlapiCmsComponent'
+const { getAllComponents } = useComponentsMeta()
+
+const flapiCmsComponents: FlapiCmsComponent[] = getAllComponents()
+console.log('allComponents', flapiCmsComponents)
 
 const flapiComponents: FlapiComponentCardProps[] = [
   {

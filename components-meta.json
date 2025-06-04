@@ -319,9 +319,7 @@
       {
         "name": "update:value",
         "type": {
-          "names": [
-            "union"
-          ],
+          "names": ["union"],
           "elements": [
             {
               "name": "string"
@@ -439,9 +437,7 @@
       {
         "name": "update:modelValue",
         "type": {
-          "names": [
-            "FlapiSelectOption"
-          ]
+          "names": ["FlapiSelectOption"]
         }
       }
     ],
@@ -550,17 +546,13 @@
       {
         "name": "update:searchTerms",
         "type": {
-          "names": [
-            "string"
-          ]
+          "names": ["string"]
         }
       },
       {
         "name": "click",
         "type": {
-          "names": [
-            "string"
-          ]
+          "names": ["string"]
         }
       }
     ],
@@ -733,17 +725,13 @@
       {
         "name": "update:expand",
         "type": {
-          "names": [
-            "boolean"
-          ]
+          "names": ["boolean"]
         }
       },
       {
         "name": "update:activePath",
         "type": {
-          "names": [
-            "string"
-          ]
+          "names": ["string"]
         }
       }
     ],
@@ -832,9 +820,7 @@
       {
         "name": "update:expand",
         "type": {
-          "names": [
-            "boolean"
-          ]
+          "names": ["boolean"]
         }
       }
     ],
@@ -1047,9 +1033,7 @@
       {
         "name": "update:value",
         "type": {
-          "names": [
-            "string"
-          ]
+          "names": ["string"]
         }
       }
     ],
@@ -1074,9 +1058,7 @@
       {
         "name": "confirm",
         "type": {
-          "names": [
-            "string"
-          ]
+          "names": ["string"]
         }
       }
     ],
@@ -1121,9 +1103,7 @@
       {
         "name": "update:value",
         "type": {
-          "names": [
-            "string"
-          ]
+          "names": ["string"]
         }
       }
     ],
@@ -1171,9 +1151,7 @@
       {
         "name": "update:currentPage",
         "type": {
-          "names": [
-            "number"
-          ]
+          "names": ["number"]
         }
       },
       {
