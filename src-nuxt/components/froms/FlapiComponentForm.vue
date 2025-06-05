@@ -1,5 +1,5 @@
 <template>
-  <div class="rounded-lg bg-white p-6 shadow-md">
+  <div class="flex max-h-[80vh] w-full min-w-[1200px] max-w-2xl flex-col gap-4 overflow-y-auto">
     <div class="mb-6 flex items-start justify-between">
       <div>
         <h2 class="text-xl font-bold text-gray-800">{{ component.name }}</h2>
