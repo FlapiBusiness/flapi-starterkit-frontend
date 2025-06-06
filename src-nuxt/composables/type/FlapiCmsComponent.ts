@@ -7,7 +7,7 @@
  * @property {FlapiProp[]} [props] - An optional array of properties (props) that the component accepts.
  * @property {string} category - The category to which the component belongs.
  * @property {FlapiSlot[]} [slots] - An optional array of slots that the component can use.
- * @property {Event[]} [events] - An optional array of events that the component can emit.
+ * @property {FlapiEvent[]} [events] - An optional array of events that the component can emit.
  */
 export type FlapiCmsComponent = {
   name: string
