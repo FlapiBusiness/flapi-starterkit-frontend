@@ -25,8 +25,6 @@ type ComponentMeta = {
 }
 
 export default defineEventHandler(async (event) => {
-  console.log(` ${event.node.req.url}`)
-
   if (!event.node.req.url?.includes('/dashboard')) {
     return
   }

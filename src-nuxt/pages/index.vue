@@ -1,9 +1,9 @@
 <template>
   <div>
     <component
-      v-for="(component, index) in flapiCmsComponents"
+      v-for="(component, index) in components"
       :key="index"
-      :is="componentDisplayMap[component.name]"
+      :is="getComponentName(component.name)"
       v-bind="component.data"
     />
   </div>
@@ -11,14 +11,23 @@
 
 <script lang="ts" setup>
 import type { CmsComponentStore } from '~/stores/cmsComponentStore'
-import { componentDisplayMap } from '@/components/sections/componentDisplayMap'
+import { getComponentName } from '@/components/sections/componentDisplayMap'
 
-const flapiCmsComponents: Ref<CmsComponentStore[]> = ref([])
+const components: Ref<CmsComponentStore[]> = ref([])
+
+// /**
+//  * @param {string} name - The name of the component.
+//  * @returns {string} The display name of the component.
+//  * @description This function retrieves the display name of a component based on its name.
+//  */
+// const getComponentName: (name: string) => string = (name: string): string => {
+//   return componentDisplayMap[name] || name
+// }
 
 onMounted(() => {
   if (typeof window !== 'undefined') {
-    flapiCmsComponents.value = localStorage.getItem('flapiCmsComponents')
-      ? JSON.parse(localStorage.getItem('flapiCmsComponents') as string)
+    components.value = localStorage.getItem('cmsComponents')
+      ? JSON.parse(localStorage.getItem('cmsComponents') as string)
       : []
   }
 })

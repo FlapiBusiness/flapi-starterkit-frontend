@@ -69,7 +69,7 @@ export const useCmsComponentStore: ReturnType<
       publishCmsComponentStores(): void {
         // save the components to lacal storage
         if (typeof window !== 'undefined') {
-          localStorage.setItem('CmsComponentStores', JSON.stringify(this.components))
+          localStorage.setItem('cmsComponents', JSON.stringify(this.components))
         }
       },
     },

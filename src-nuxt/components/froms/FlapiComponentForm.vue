@@ -1,57 +1,50 @@
 <template>
-  <div class="flex max-h-[80vh] w-full min-w-[1200px] max-w-2xl flex-col gap-4 overflow-y-auto">
-    <div class="mb-6 flex items-start justify-between">
-      <div>
-        <h2 class="text-xl font-bold text-gray-800">{{ component.name }}</h2>
-        <p v-if="component.description" class="mt-1 text-gray-600">{{ component.description }}</p>
-      </div>
-      <span class="text-xs rounded bg-indigo-100 px-2 py-1 font-medium text-indigo-800">
+  <div class="flex max-h-[80vh] w-full min-w-[1200px] max-w-2xl flex-col gap-4 overflow-y-auto text-light-400">
+    <div class="felx-row flex items-center">
+      <h1 class="text-xl font-medium text-light-400">{{ component.name }}</h1>
+      <span class="text-xs m-4 rounded bg-indigo-100 px-2 py-1 font-medium text-indigo-800">
         {{ component.category }}
       </span>
     </div>
 
-    <form @submit.prevent="handleSubmit" class="space-y-6">
-      <!-- Props Section -->
+    <div v-if="component.description" class="text-base font-medium text-light-400">
+      {{ component.description }}
+    </div>
+
+    <form @submit.prevent="submit" class="space-y-6">
       <div v-if="component.props?.length" class="space-y-4">
-        <h3 class="text-sm font-medium text-gray-700">Propriétés</h3>
+        <div id="props-section-title" slotContent="Properties" class="text-sm font-medium"></div>
 
         <div v-for="(prop, index) in component.props" :key="index" class="space-y-2">
           <div class="flex items-center justify-between">
-            <label class="block text-sm font-medium capitalize text-gray-700">
-              {{ prop.name }}
-              <span v-if="prop.required" class="text-red-500">*</span>
-            </label>
-            <span v-if="prop.type.names?.length" class="text-xs text-gray-500">
+            <div :slotContent="prop.name" class="block text-sm font-medium capitalize text-gray-700"></div>
+            <div v-if="prop.type.name" class="text-xs font-medium text-light-400">
+              {{ prop.type.name }}
+            </div>
+            <div v-if="prop.type.names" class="text-xs font-medium text-light-400">
+              oui
               {{ prop.type.names.join(' | ') }}
-            </span>
+            </div>
           </div>
 
-          <!-- String Input -->
           <FlapiInput
-            v-if="prop.type.names?.includes('string')"
+            v-if="prop.type.name !== 'boolean' && prop.type.name !== 'color' && !prop.type.elements?.length"
             v-model:value="formValues[prop.name]"
             :label="prop.name"
             :placeholder="prop.defaultValue ? getDefaultValue(prop.defaultValue) : ''"
             type="text"
           />
 
-          <!-- Number Input -->
-          <FlapiInput
-            v-else-if="prop.type.names?.includes('number')"
-            v-model:value="formValues[prop.name]"
+          <FlapiCheckbox
+            v-if="prop.type.name === 'boolean'"
+            v-model:checked="formValues[prop.name]"
             :label="prop.name"
-            :placeholder="prop.defaultValue ? getDefaultValue(prop.defaultValue) : ''"
-            type="number"
           />
-
-          <!-- Boolean Checkbox -->
-          <div v-else-if="prop.type.names?.includes('boolean')" class="flex items-center">
-            <FlapiCheckbox v-model:checked="formValues[prop.name]" :label="prop.name" />
-          </div>
 
           <!-- Color Picker -->
           <div v-else-if="prop.name.includes('Color')" class="flex items-center gap-2">
-            <FlapiColorPicker v-model:value="formValues[prop.name]" :label="prop.name" />
+            <div class="text-sm font-medium text-white">FlapiColorPicker</div>
+            <FlapiColorPicker :id="`color-picker-${index}`" v-model:value="formValues[prop.name]" :label="prop.name" />
           </div>
 
           <!-- Enum Select -->
@@ -62,50 +55,18 @@
             :options="prop.type.elements.map((el) => ({ value: el.name, label: el.name }))"
           />
 
-          <!-- Unsupported Type -->
-          <div v-else class="rounded bg-gray-50 p-2 text-sm text-gray-500">
-            Type non géré : {{ prop.type.names?.join(', ') || 'Inconnu' }}
-          </div>
-
-          <p v-if="prop.defaultValue" class="text-xs text-gray-500">
-            Valeur par défaut : {{ getDefaultValue(prop.defaultValue) }}
-          </p>
-        </div>
-      </div>
-
-      <!-- Slots Section -->
-      <div v-if="component.slots?.length" class="border-t border-gray-200 pt-4">
-        <h3 class="mb-2 text-sm font-medium text-gray-700">Slots</h3>
-        <div v-for="(slot, index) in component.slots" :key="`slot-${index}`" class="mb-2">
-          <div class="flex items-center justify-between">
-            <label class="text-sm text-gray-600">{{ slot.name }}</label>
-            <span v-if="slot.scoped" class="text-xs rounded bg-yellow-100 px-2 py-1 text-yellow-800"> Scoped </span>
-          </div>
-          <div v-if="slot.bindings?.length" class="ml-4 mt-1">
-            <div v-for="(binding, bIndex) in slot.bindings" :key="`binding-${bIndex}`" class="text-xs text-gray-500">
-              {{ binding.name }} ({{ binding.title }})
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Events Section -->
-      <div v-if="component.events?.length" class="border-t border-gray-200 pt-4">
-        <h3 class="mb-2 text-sm font-medium text-gray-700">Événements</h3>
-        <div
-          v-for="(event, index) in component.events"
-          :key="`event-${index}`"
-          class="mb-1 flex items-center justify-between"
-        >
-          <span class="text-sm text-gray-600">{{ event.name }}</span>
-          <span v-if="event.type" class="text-xs text-gray-500">
-            {{ event.type.names?.join(' | ') || 'Inconnu' }}
-          </span>
+          <div
+            v-if="prop.defaultValue"
+            :slotContent="'Default Value: ' + getDefaultValue(prop.defaultValue)"
+            class="text-xs"
+          ></div>
         </div>
       </div>
 
       <div class="border-t border-gray-200 pt-4">
-        <FlapiButton type="submit" variant="primary" size="md" class="w-full"> Générer le composant </FlapiButton>
+        <FlapiButton type="submit" variant="primary" size="md" class="w-full" @click="submit"
+          >Ajouter le composant</FlapiButton
+        >
       </div>
     </form>
   </div>
@@ -114,7 +75,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import type { Ref } from 'vue'
-import type { Prop, DefaultValue, FlapiCmsComponent } from '~/composables/type/FlapiCmsComponent'
+import type { FlapiProp, DefaultValue, FlapiCmsComponent } from '~/composables/type/FlapiCmsComponent'
+import FlapiCheckbox from '../inputs/FlapiCheckbox.vue'
+
 /**
  * @description
  * This is the model value for the Flapi CMS component form.
@@ -169,7 +132,7 @@ const emit: (event: 'submit', values: Record<string, any>) => void = defineEmits
  * This function handles the form submission.
  * It validates the form values and emits the 'submit' event with the values.
  */
-const handleSubmit: () => void = () => {
+const submit: () => void = () => {
   for (const key in formValues.value) {
     if (formValues.value[key] === undefined || formValues.value[key] === null) {
       formValues.value[key] = ''
@@ -180,9 +143,12 @@ const handleSubmit: () => void = () => {
 }
 
 onMounted(() => {
-  console.log('FlapiComponentForm mounted with props:', props)
+  formValues.value = props.component.props?.reduce((acc: Record<string, any>, prop: FlapiProp) => {
+    acc[prop.name] = prop.defaultValue ? getDefaultValue(prop.defaultValue) : ''
+    return acc
+  }, {})
 
-  props.component.props?.forEach((prop: Prop) => {
+  props.component.props?.forEach((prop: FlapiProp) => {
     if (prop.defaultValue) {
       console.log('Initializing prop:', prop.name, 'with default value:', getDefaultValue(prop.defaultValue))
     } else {

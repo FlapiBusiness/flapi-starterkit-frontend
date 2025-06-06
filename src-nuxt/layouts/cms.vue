@@ -53,8 +53,6 @@ const componentFormMap: Record<string, any> = {
 }
 
 const activeFormComponent: ComputedRef = computed(() => {
-  console.log('Current component:', currentComponent.value)
-
   // TODO: Add more component forms as needed
   if (currentComponent.value && !componentFormMap[currentComponent.value.name]) {
     return FlapiComponentForm
@@ -83,7 +81,6 @@ const addFlapiCmsComponent: (component: HeroSectionPayload) => void = (component
   if (!currentComponent.value) {
     return
   }
-  console.log('Component added:', currentComponent.value)
   const flapiCmsComponents: CmsComponentStore[] = flapiCmsComponentStore.components
 
   flapiCmsComponentStore.addCmsComponentStore({

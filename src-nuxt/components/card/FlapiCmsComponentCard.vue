@@ -49,24 +49,24 @@
 </template>
 
 <script lang="ts" setup>
-import type { Prop, Slot, Event } from '~/composables/type/FlapiCmsComponent'
+import type { FlapiProp, FlapiSlot, FlapiEvent } from '~/composables/type/FlapiCmsComponent'
 /**
  * @description
  * This is the model value for the Flapi CMS component card.
  * @property {string} name - The name of the component.
  * @property {string} description - The description of the component.
- * @property {Prop[]} [props] - The props of the component.
+ * @property {FlapiProp[]} [props] - The props of the component.
  * @property {string} category - The category of the component.
- * @property {Slot[]} [slots] - The slots of the component.
- * @property {Event[]} [events] - The events of the component.
+ * @property {FlapiSlot[]} [slots] - The slots of the component.
+ * @property {FlapiEvent[]} [events] - The events of the component.
  */
 export type FlapiCmsComponentCardProps = {
   name: string
   description: string
-  props?: Prop[]
+  props?: FlapiProp[]
   category: string
-  slots?: Slot[]
-  events?: Event[]
+  slots?: FlapiSlot[]
+  events?: FlapiEvent[]
 }
 
 const props: FlapiCmsComponentCardProps = defineProps({
@@ -79,30 +79,30 @@ const props: FlapiCmsComponentCardProps = defineProps({
     required: true,
   },
   props: {
-    type: Array as PropType<Prop[]>,
+    type: Array as PropType<FlapiProp[]>,
     /**
      * The default value for the props property.
-     * @returns {Prop[]} Prop[]
+     * @returns {FlapiProp[]} Prop[]
      */
-    default: (): Prop[] => [],
+    default: (): FlapiProp[] => [],
   },
   category: {
     type: String,
     required: true,
   },
   slots: {
-    type: Array as PropType<Slot[]>,
+    type: Array as PropType<FlapiSlot[]>,
     /**
      * The default value for the slots property.
-     * @returns {Slot[]} Slot[]
+     * @returns {FlapiSlot[]} Slot[]
      */
-    default: (): Slot[] => [],
+    default: (): FlapiSlot[] => [],
   },
   events: {
-    type: Array as PropType<Event[]>,
+    type: Array as PropType<FlapiEvent[]>,
     /**
      * The default value for the events property.
-     * @returns {Event[]} Event[]
+     * @returns {FlapiEvent[]} Event[]
      */
     default: (): Event[] => [],
   },

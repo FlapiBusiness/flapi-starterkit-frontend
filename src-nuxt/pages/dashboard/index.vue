@@ -23,14 +23,14 @@
       <FlapiIcon color="#fff" :height="24" mode="stroke" name="Trash2" viewBox="0 0 24 24" :width="24" />
     </FlapiSquareButton>
 
-    <component :is="componentDisplayMap[component.name]" v-bind="component.data" />
+    <component :is="getComponentName(component.name)" v-bind="component.data" />
   </div>
 </template>
 
 <script lang="ts" setup>
 import { useCmsComponentStore } from '~/stores/cmsComponentStore'
 import type { CmsComponentStore } from '~/stores/cmsComponentStore'
-import { componentDisplayMap } from '@/components/sections/componentDisplayMap'
+import { getComponentName } from '@/components/sections/componentDisplayMap'
 
 import type { Ref } from 'vue'
 import { ref } from 'vue'
@@ -48,8 +48,6 @@ onMounted(() => {
   const published: CmsComponentStore[] = localStorage.getItem('cmsComponents')
     ? JSON.parse(localStorage.getItem('cmsComponents') as string)
     : []
-
-  console.log('Published components:', published)
 
   cmsComponentStore.setCmsComponentStores(published)
   cmsComponents.value = published
