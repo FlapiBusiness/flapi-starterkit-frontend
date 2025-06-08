@@ -116,6 +116,7 @@ const removeComponent: (index: number) => void = (index: number): void => {
   cmsComponents.value.splice(index, 1)
   cmsComponents.value.forEach((item: CmsComponentStore, i: number) => (item.order = i + 1))
   cmsComponentStore.setCmsComponentStores(cmsComponents.value)
+  closeContextMenu()
 }
 
 /**
@@ -127,6 +128,7 @@ const updateCmsComponents: (index: number) => void = (index: number): void => {
   // TODO: Implement the logic to update the component
   const currentComponent: CmsComponentStore = cmsComponents.value[index]
   cmsComponentStore.updateCmsComponentStore(currentComponent)
+  closeContextMenu()
 }
 
 /**
