@@ -1,9 +1,9 @@
 <template>
   <div
-    class="group relative flex h-[170px] w-[170px] cursor-pointer flex-col items-center justify-center rounded-2xl border-[3px] border-transparent bg-gray-300 p-4 transition hover:border-primary-300"
+    class="group relative flex h-[90px] w-[170px] cursor-pointer flex-col items-center justify-center rounded-2xl border-[3px] border-transparent bg-gray-300 p-4 transition hover:border-primary-300"
     @click="emit('select', props)"
   >
-    <h3 class="mt-4 text-center text-base font-semibold text-light-400">{{ props.name }}</h3>
+    <h3 class="text-center text-base font-semibold text-light-400">{{ props.name }}</h3>
 
     <div
       class="pointer-events-none absolute -top-2 left-1/2 z-50 -translate-x-1/2 opacity-0 transition-opacity group-hover:opacity-100"

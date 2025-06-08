@@ -8,10 +8,11 @@
 
     <BaseModal v-model="isModalOpen">
       <component
-        :is="activeFormComponent"
         v-if="activeFormComponent"
+        :is="activeFormComponent"
         :component="currentComponent"
         @submit="addFlapiCmsComponent"
+        @cancel="isModalOpen = false"
       />
     </BaseModal>
 
@@ -36,9 +37,7 @@ import FooterSectionForm from '~/components/froms/FooterSectionForm.vue'
 import FlapiComponentForm from '~/components/froms/FlapiComponentForm.vue'
 import BaseModal from '@/components/ui/BaseModal.vue'
 import type { FlapiCmsComponentCardProps } from '@/components/card/FlapiCmsComponentCard.vue'
-import type { HeroSectionPayload } from '~/components/froms/HeroSectionForm.vue'
 import type { FlapiComponentCardProps } from '~/components/card/ComponentCard.vue'
-
 // Store
 const flapiCmsComponentStore: ReturnType<typeof useCmsComponentStore> = useCmsComponentStore()
 
@@ -74,10 +73,12 @@ const triggerFlapiCmsComponent: (
 
 /**
  * This function adds a component to the CMS layout.
- * @param {HeroSectionPayload} component - The component to add.
+ * @param {FlapiCmsComponentCardProps | FlapiComponentCardProps} component - The component to add.
  * @returns {void}
  */
-const addFlapiCmsComponent: (component: HeroSectionPayload) => void = (component: HeroSectionPayload): void => {
+const addFlapiCmsComponent: (component: FlapiCmsComponentCardProps | FlapiComponentCardProps) => void = (
+  component: FlapiCmsComponentCardProps | FlapiComponentCardProps,
+): void => {
   if (!currentComponent.value) {
     return
   }
