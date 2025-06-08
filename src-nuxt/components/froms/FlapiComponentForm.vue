@@ -22,7 +22,6 @@
               {{ prop.type.name }}
             </div>
             <div v-if="prop.type.names" class="text-xs font-medium text-light-400">
-              oui
               {{ prop.type.names.join(' | ') }}
             </div>
           </div>
@@ -35,19 +34,17 @@
             type="text"
           />
 
-          <FlapiCheckbox
-            v-if="prop.type.name === 'boolean'"
-            v-model:checked="formValues[prop.name]"
-            :label="prop.name"
-          />
-
-          <!-- Color Picker -->
-          <div v-else-if="prop.name.includes('Color')" class="flex items-center gap-2">
-            <div class="text-sm font-medium text-white">FlapiColorPicker</div>
-            <FlapiColorPicker :id="`color-picker-${index}`" v-model:value="formValues[prop.name]" :label="prop.name" />
+          <div v-if="prop.type.name === 'boolean'" class="flex flex-row items-center gap-2">
+            <div class="text-sm font-medium text-white">{{ prop.name }}</div>
+            <FlapiCheckbox v-model:checked="formValues[prop.name]" :label="prop.name" />
           </div>
 
-          <!-- Enum Select -->
+          <!-- Color Picker TODO: Uncomment when FlapiColorPicker is available -->
+          <!-- <div v-else-if="prop.name.includes('Color')" class="flex items-center gap-2">
+            <div class="text-sm font-medium text-white">FlapiColorPicker</div>
+            <FlapiColorPicker :id="`color-picker-${index}`" v-model:value="formValues[prop.name]" :label="prop.name" />
+          </div> -->
+
           <FlapiSelect
             v-else-if="prop.type.elements?.length"
             v-model:value="formValues[prop.name]"
@@ -85,12 +82,17 @@ import FlapiCheckbox from '../inputs/FlapiCheckbox.vue'
  */
 export type FlapiFormProps = {
   component: FlapiCmsComponent
+  index?: number
 }
 
 const props: FlapiFormProps = defineProps({
   component: {
     type: Object as () => FlapiCmsComponent,
     required: true,
+  },
+  index: {
+    type: Number,
+    default: -1,
   },
 })
 
@@ -106,16 +108,14 @@ const formValues: Ref = ref<Record<string, any>>({})
 const getDefaultValue: (defaultValue: DefaultValue) => any = (defaultValue: DefaultValue) => {
   if (defaultValue.func) return null
 
-  // Supprimer les quotes pour les strings
   if (defaultValue.value.startsWith("'") && defaultValue.value.endsWith("'")) {
     return defaultValue.value.slice(1, -1)
   }
 
-  // Convertir les boolean strings en boolean
   if (defaultValue.value === 'true') return true
   if (defaultValue.value === 'false') return false
+  if (defaultValue.value === 'null') return null
 
-  // Convertir les nombres
   if (!isNaN(Number(defaultValue.value))) {
     return Number(defaultValue.value)
   }
