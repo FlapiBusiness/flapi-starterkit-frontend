@@ -7,23 +7,35 @@
     @dragover.prevent
     @dragleave="onDragLeave"
     @drop="onDrop(index)"
+    @dragover="onDragOver(index)"
+    @contextmenu.prevent="onContextMenu($event, index)"
+    @click="closeContextMenu"
+    @mouseenter="hoveredIndex = index"
     :class="[
-      'group relative mb-2 bg-gray-100 p-1 transition',
-      hoveredIndex === index ? 'border-2 border-blue-500' : 'border border-transparent',
+      'group relative my-2 p-1 transition',
+      hoveredIndex === index ? 'border-2 border-blue-500' : 'border border-gray-300',
     ]"
   >
-    <FlapiSquareButton
-      variant="outline"
-      class="absolute right-2 top-2 hidden transition-opacity duration-300 group-hover:block"
-      :size="48"
-      backgroundColor="#EC364B"
-      backgroundHoverColor="#C0172A"
-      @click="removeComponent(index)"
-    >
-      <FlapiIcon color="#fff" :height="24" mode="stroke" name="Trash2" viewBox="0 0 24 24" :width="24" />
-    </FlapiSquareButton>
-
+    <!-- @mouseleave="closeContextMenu" -->
     <component :is="getComponentName(component.name)" v-bind="component.data" />
+  </div>
+  <div
+    v-if="contextMenu.index !== null"
+    :style="{ position: 'fixed', top: contextMenu.y + 'px', left: contextMenu.x + 'px', zIndex: 1000 }"
+    class="rounded border bg-gray-500 p-2 shadow"
+  >
+    <button
+      class="block w-full rounded px-2 py-1 text-left text-sm font-medium text-light-400 hover:bg-gray-600"
+      @click="removeComponent(contextMenu.index)"
+    >
+      Supprimer
+    </button>
+    <button
+      class="block w-full rounded px-2 py-1 text-left text-sm font-medium text-light-400 hover:bg-gray-600"
+      @click="updateCmsComponents(contextMenu.index)"
+    >
+      Modifier
+    </button>
   </div>
 </template>
 
@@ -43,6 +55,7 @@ const cmsComponentStore: ReturnType<typeof useCmsComponentStore> = useCmsCompone
 const cmsComponents: Ref<CmsComponentStore[]> = ref(cmsComponentStore.components)
 const hoveredIndex: Ref<number | null> = ref(null)
 let draggedIndex: number = -1
+const contextMenu: Ref = ref<{ x: number; y: number; index: number | null }>({ x: 0, y: 0, index: null })
 
 onMounted(() => {
   const published: CmsComponentStore[] = localStorage.getItem('cmsComponents')
@@ -80,6 +93,15 @@ const onDrop: (dropIndex: number) => void = (dropIndex: number): void => {
 }
 
 /**
+ * @param {number} index - The index of the component being dragged over.
+ * @returns {void}
+ * @description This function sets the hovered index when a component is dragged over.
+ */
+const onDragOver: (index: number) => void = (index: number): void => {
+  hoveredIndex.value = index
+}
+
+/**
  * @returns {void}
  */
 const onDragLeave: () => void = (): void => {
@@ -94,5 +116,41 @@ const removeComponent: (index: number) => void = (index: number): void => {
   cmsComponents.value.splice(index, 1)
   cmsComponents.value.forEach((item: CmsComponentStore, i: number) => (item.order = i + 1))
   cmsComponentStore.setCmsComponentStores(cmsComponents.value)
+}
+
+/**
+ * @param {number} index - The index of the component to update.
+ * @returns {void}
+ * @description This function sets the current component in the store and opens the modal for editing.
+ */
+const updateCmsComponents: (index: number) => void = (index: number): void => {
+  // TODO: Implement the logic to update the component
+  const currentComponent: CmsComponentStore = cmsComponents.value[index]
+  cmsComponentStore.updateCmsComponentStore(currentComponent)
+}
+
+/**
+ * @param {MouseEvent} event - The mouse event that triggered the context menu.
+ * @param {number} index - The index of the component for which the context menu is opened.
+ * @returns {void}
+ * @description This function opens a context menu at the position of the mouse event.
+ */
+const onContextMenu: (event: MouseEvent, index: number) => void = (event: MouseEvent, index: number): void => {
+  event.preventDefault()
+  contextMenu.value = {
+    x: event.clientX,
+    y: event.clientY,
+    index: index,
+  }
+}
+
+/**
+ * @returns {void}
+ * @description This function closes the context menu.
+ */
+const closeContextMenu: () => void = (): void => {
+  contextMenu.value.index = null
+  contextMenu.value.x = 0
+  contextMenu.value.y = 0
 }
 </script>
