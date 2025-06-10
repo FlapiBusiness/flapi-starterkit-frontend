@@ -153,7 +153,7 @@ jobs:
 
       - name: Build with Capacitor - iOS
         if: ${{ matrix.platform == 'macos-15' }}
-        run: npm run mobile:build:ios:staging && ls -la 
+        run: npm run mobile:build:ios:staging && ls -la
 
       - name: Verify if .app is signed - iOS
         if: ${{ matrix.platform == 'macos-15' }}
