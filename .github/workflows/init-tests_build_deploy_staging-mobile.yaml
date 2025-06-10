@@ -146,10 +146,8 @@ jobs:
       - name: Determine SDK Path and set SDKROOT - macOS / iOS
         if: ${{ matrix.platform == 'macos-15' }}
         run: |
-          sdk="${{ matrix.sdk }}"
-          SDKROOT=$(xcrun --sdk $sdk --show-sdk-path)
+          SDKROOT=$(xcrun --sdk iphoneos --show-sdk-path)
           echo "SDKROOT=$SDKROOT" >> $GITHUB_ENV
-          echo "Using SDK: $sdk"
 
       - name: Build with Capacitor - iOS
         if: ${{ matrix.platform == 'macos-15' }}
