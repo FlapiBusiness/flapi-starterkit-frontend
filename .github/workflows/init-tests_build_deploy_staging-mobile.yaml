@@ -42,10 +42,10 @@ jobs:
       - name: Read current version from version.txt and append branch and commit hash - Android
         if: ${{ matrix.platform == 'ubuntu-latest' }}
         run: |
-          VERSION_BASE=$(cat version.txt)
-
           # Check if VERSION_BASE is empty and set default value if necessary
-          if [ -z "$VERSION_BASE" ]; then
+          if [ -f version.txt ]; then
+            VERSION_BASE=$(cat version.txt)
+          else
             VERSION_BASE="1.0.0"
           fi
 
