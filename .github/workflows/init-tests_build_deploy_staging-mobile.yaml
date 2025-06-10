@@ -153,14 +153,33 @@ jobs:
         if: ${{ matrix.platform == 'macos-15' }}
         env:
           APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+          PROVISIONING_PROFILE_NAME: ${{ secrets.IOS_PROVISIONING_PROFILE_NAME }}
         run: |
           cd ios/App
 
-          # Remplace CODE_SIGN_STYLE
+          # Remplace CODE_SIGN_STYLE par Manual
           sed -i '' 's/CODE_SIGN_STYLE = Automatic;/CODE_SIGN_STYLE = Manual;/g' App.xcodeproj/project.pbxproj
 
-          # Remplace DevelopmentTeam vide
+          # Injecte ou remplace DevelopmentTeam
           sed -i '' "s/DevelopmentTeam = \"\";/DevelopmentTeam = \"$APPLE_TEAM_ID\";/g" App.xcodeproj/project.pbxproj
+          grep -q "DevelopmentTeam = \"$APPLE_TEAM_ID\";" App.xcodeproj/project.pbxproj || \
+          sed -i '' "/CODE_SIGN_STYLE = Manual;/a\\
+          \ \ \ \ DevelopmentTeam = \"$APPLE_TEAM_ID\";
+          " App.xcodeproj/project.pbxproj
+
+          # Injecte ou remplace PROVISIONING_PROFILE_SPECIFIER
+          sed -i '' "s/PROVISIONING_PROFILE_SPECIFIER = .*/PROVISIONING_PROFILE_SPECIFIER = \"$PROVISIONING_PROFILE_NAME\";/g" App.xcodeproj/project.pbxproj
+          grep -q "PROVISIONING_PROFILE_SPECIFIER = \"$PROVISIONING_PROFILE_NAME\";" App.xcodeproj/project.pbxproj || \
+          sed -i '' "/DevelopmentTeam = \"$APPLE_TEAM_ID\";/a\\
+          \ \ \ \ PROVISIONING_PROFILE_SPECIFIER = \"$PROVISIONING_PROFILE_NAME\";
+          " App.xcodeproj/project.pbxproj
+
+          # Injecte ou remplace CODE_SIGN_IDENTITY
+          sed -i '' 's/CODE_SIGN_IDENTITY = .*;/CODE_SIGN_IDENTITY = "Apple Distribution";/g' App.xcodeproj/project.pbxproj
+          grep -q 'CODE_SIGN_IDENTITY = "Apple Distribution";' App.xcodeproj/project.pbxproj || \
+          sed -i '' "/PROVISIONING_PROFILE_SPECIFIER = \"$PROVISIONING_PROFILE_NAME\";/a\\
+          \ \ \ \ CODE_SIGN_IDENTITY = \"Apple Distribution\";
+          " App.xcodeproj/project.pbxproj
 
       - name: Build with Capacitor - iOS
         if: ${{ matrix.platform == 'macos-15' }}
