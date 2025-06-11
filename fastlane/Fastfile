@@ -28,7 +28,6 @@ lane :create_new_app do |options|
 
   # Étape 1 : Créer l'identifiant d'application (Bundle ID)
   produce(
-    api_key: api_key,
     username: ENV["APPLE_ID"],
     team_id: ENV["APPLE_TEAM_ID"],
     app_identifier: ENV["APP_IOSMACOS_IDENTIFIER"], # ex. : com.crzgames.testexe
