@@ -159,8 +159,10 @@ jobs:
           IOS_APPLE_PROVISIONING_PROFILE_APPLEDISTRIBUTION_NAME: 'FlapiExampleApp'
           APP_VERSION: '1.0.0'
           APP_IOSMACOS_IDENTIFIER: 'com.example.flapiexampleapp'
+          FASTLANE_USERNAME: ${{ secrets.APPLE_ID }}
           FASTLANE_SESSION: ${{ secrets.FASTLANE_SESSION }}
           FASTLANE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
+          FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.APPLE_APPLICATION_SPECIFIC_PASSWORD }}
         run: fastlane create_new_app
 
       - name: Build with Capacitor - iOS
