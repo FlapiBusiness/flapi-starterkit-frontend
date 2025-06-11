@@ -110,7 +110,6 @@ lane :create_new_app do |options|
     team_id: ENV["APPLE_TEAM_ID"],
     app_identifier: ENV["APP_IOSMACOS_IDENTIFIER"],
     provisioning_name: ENV["IOS_APPLE_PROVISIONING_PROFILE_APPLEDISTRIBUTION_NAME"], # Nom du profil de provisionnement
-    ignore_profiles_with_different_name: true, # Utiliser en combinaison avec :provisioning_name - lorsque vrai, seuls les profils correspondant exactement à ce nom seront téléchargés
     output_path: "~/Library/Developer/Xcode/UserData/Provisioning\ Profiles", # Chemin de sortie pour le profil de provisionnement (*.mobileprovision) après la création
     force: true, # Si vous souhaitez que le profil de provisionnement soit renouvelé quel que soit son état, utilisez cette --forceoption. Vous obtiendrez ainsi un profil avec une durée de vie maximale. --force Tous les appareils disponibles seront également ajoutés à ce profil.
     skip_certificate_verification: false,
