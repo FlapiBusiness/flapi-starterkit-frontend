@@ -65,6 +65,7 @@
 
 <script lang="ts" setup>
 import { computed, ref, type ComputedRef } from 'vue'
+import type { CmsComponent } from '~/components/type/CmsComponent'
 
 /**
  * @description
@@ -103,8 +104,8 @@ const values: Ref<FlapiFooterPayload> = ref<FlapiFooterPayload>({
   ],
 })
 
-const emit: (event: 'submit', values: FlapiFooterPayload) => void = defineEmits<{
-  (event: 'submit', value: FlapiFooterPayload): void
+const emit: (event: 'submit', values: CmsComponent) => void = defineEmits<{
+  (event: 'submit', value: CmsComponent): void
 }>()
 
 const errorMessage: Ref<string | null> = ref<string | null>(null)
@@ -126,7 +127,13 @@ const formIsValid: ComputedRef<boolean> = computed(() => {
  */
 const submit: () => void = () => {
   if (formIsValid.value) {
-    emit('submit', values.value)
+    const component: CmsComponent = {
+      name: 'FlapiFooterSection',
+      description: 'Footer section component',
+      category: 'Flapi Components',
+      props: values.value,
+    }
+    emit('submit', component)
     errorMessage.value = null // Réinitialiser le message d'erreur
   } else {
     errorMessage.value = 'Tous les champs doivent être remplis.'
