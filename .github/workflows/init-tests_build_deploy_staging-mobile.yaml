@@ -160,6 +160,7 @@ jobs:
           APP_VERSION: '1.0.0'
           APP_IOSMACOS_IDENTIFIER: 'com.example.flapiexampleapp'
           FASTLANE_SESSION: ${{ secrets.FASTLANE_SESSION }}
+          FASTLANE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
         run: fastlane create_new_app
 
       - name: Build with Capacitor - iOS
