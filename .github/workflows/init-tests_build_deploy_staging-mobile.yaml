@@ -153,7 +153,7 @@ jobs:
         if: ${{ matrix.platform == 'macos-15' }}
         env:
           APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
-          PROVISIONING_PROFILE_NAME: ${{ secrets.IOS_PROVISIONING_PROFILE_NAME }}
+          PROVISIONING_PROFILE_NAME: ${{ secrets.IOS_APPLE_PROVISIONING_PROFILE_APPLEDISTRIBUTION_FLAPIEXAMPLEAPP_NAME }}
         run: |
           cd ios/App
 
