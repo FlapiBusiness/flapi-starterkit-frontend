@@ -149,6 +149,23 @@ jobs:
           SDKROOT=$(xcrun --sdk iphoneos --show-sdk-path)
           echo "SDKROOT=$SDKROOT" >> $GITHUB_ENV
 
+      - name: Debug Code Signing Info
+        if: ${{ matrix.platform == 'macos-15' }}
+        run: |
+          echo "🔐 Sign Identities:"
+          security find-identity -v -p codesigning
+
+          echo "📄 Provisioning Profiles:"
+          ls -l ~/Library/MobileDevice/Provisioning\ Profiles
+
+          echo "📄 Dump Provisioning Profile Content:"
+          for f in ~/Library/MobileDevice/Provisioning\ Profiles/*.mobileprovision; do
+            echo "--- $f ---"
+            security cms -D -i "$f" | plutil -extract Name raw -o - -
+            security cms -D -i "$f" | plutil -extract TeamIdentifier raw -o - -
+            security cms -D -i "$f" | plutil -extract UUID raw -o - -
+          done
+
       - name: Disable automatic signing in Xcode project
         if: ${{ matrix.platform == 'macos-15' }}
         env:
