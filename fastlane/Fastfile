@@ -33,7 +33,7 @@ lane :create_new_app do |options|
     app_identifier: ENV["APP_IOSMACOS_IDENTIFIER"], # ex. : com.crzgames.testexe
     app_name: ENV["APP_NAME"],
     app_version: ENV["APP_VERSION"],
-    sku: Time.now.to_s, # SKU unique basé sur timestamp
+    sku: Time.now.to_i.to_s, # SKU unique basé sur timestamp
     language: "fr-FR",
     platform: "ios",
     skip_itc: false, # Créer sur App Store Connect
