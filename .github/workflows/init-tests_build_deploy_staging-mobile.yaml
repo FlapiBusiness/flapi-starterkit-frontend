@@ -100,17 +100,13 @@ jobs:
           --keystorealiaspass "$ANDROID_KEYSTORE_KEY_PASSWORD" \
           --androidreleasetype APK
 
-      - name: Install the Apple Certificate and Provisioning Profile (Apple Distribution) - AppStore / TestFlight - iOS
+      - name: Install the Apple Certificate (Apple Distribution) - AppStore / TestFlight - iOS
         if: ${{ matrix.platform == 'macos-15' }}
         env:
           # Certificat Apple au format p12 encodé en base64
           IOSMACOS_APPLE_CERTIFICATE_APPLEDISTRIBUTION_P12_BASE64: ${{ secrets.IOSMACOS_APPLE_CERTIFICATE_APPLEDISTRIBUTION_P12_BASE64 }}
           # Mot de passe du certificat apple au format p12
           IOSMACOS_APPLE_CERTIFICATE_APPLEDISTRIBUTION_P12_PASSWORD: ${{ secrets.IOSMACOS_APPLE_CERTIFICATE_APPLEDISTRIBUTION_P12_PASSWORD }}
-          # Profil de provisionnement Apple au format : *.mobileprovision encodé en base64
-          # TODO: A modifier pour chaque nouvelle application iOS pour : secrets.IOS_APPLE_PROVISIONING_PROFILE_APPLEDISTRIBUTION_FLAPIEXAMPLEAPP_BASE64
-          IOSMACOS_APPLE_PROVISIONING_PROFILE_APPLEDISTRIBUTION_BASE64: ${{ secrets.IOS_APPLE_PROVISIONING_PROFILE_APPLEDISTRIBUTION_FLAPIEXAMPLEAPP_BASE64 }}
-          # Un nouveau trousseau sera créé sur le coureur, de sorte que le mot de passe du nouveau trousseau, peut être n'importe quelle nouvelle chaîne aléatoire
           APPLE_KEYCHAIN_PASSWORD: ${{ secrets.APPLE_KEYCHAIN_PASSWORD }}
         run: |
           # create variables
@@ -120,7 +116,6 @@ jobs:
 
           # import certificate and provisioning profile from secrets
           echo -n "$IOSMACOS_APPLE_CERTIFICATE_APPLEDISTRIBUTION_P12_BASE64" | base64 --decode -o $CERTIFICATE_PATH
-          echo -n "$IOSMACOS_APPLE_PROVISIONING_PROFILE_APPLEDISTRIBUTION_BASE64" | base64 --decode -o $PP_PATH
 
           # create temporary keychain
           security create-keychain -p "$APPLE_KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
@@ -149,54 +144,23 @@ jobs:
           SDKROOT=$(xcrun --sdk iphoneos --show-sdk-path)
           echo "SDKROOT=$SDKROOT" >> $GITHUB_ENV
 
-      - name: Debug Code Signing Info
+      - name: Setup fastlane with brew - iOS
         if: ${{ matrix.platform == 'macos-15' }}
         run: |
-          echo "🔐 Sign Identities:"
-          security find-identity -v -p codesigning
+          brew install fastlane
 
-          echo "📄 Provisioning Profiles:"
-          ls -l ~/Library/MobileDevice/Provisioning\ Profiles
-
-          echo "📄 Dump Provisioning Profile Content:"
-          for f in ~/Library/MobileDevice/Provisioning\ Profiles/*.mobileprovision; do
-            echo "--- $f ---"
-            security cms -D -i "$f" | plutil -extract Name raw -o - -
-            security cms -D -i "$f" | plutil -extract TeamIdentifier raw -o - -
-            security cms -D -i "$f" | plutil -extract UUID raw -o - -
-          done
-
-      - name: Disable automatic signing in Xcode project
+      - name: Run fastlane to create a new app in App Store Connect and prepare for build - iOS
         if: ${{ matrix.platform == 'macos-15' }}
         env:
           APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
-          PROVISIONING_PROFILE_NAME: ${{ secrets.IOS_APPLE_PROVISIONING_PROFILE_APPLEDISTRIBUTION_FLAPIEXAMPLEAPP_NAME }}
-        run: |
-          cd ios/App
-
-          # Remplace CODE_SIGN_STYLE par Manual
-          sed -i '' 's/CODE_SIGN_STYLE = Automatic;/CODE_SIGN_STYLE = Manual;/g' App.xcodeproj/project.pbxproj
-
-          # Injecte ou remplace DevelopmentTeam
-          sed -i '' "s/DevelopmentTeam = \"\";/DevelopmentTeam = \"$APPLE_TEAM_ID\";/g" App.xcodeproj/project.pbxproj
-          grep -q "DevelopmentTeam = \"$APPLE_TEAM_ID\";" App.xcodeproj/project.pbxproj || \
-          sed -i '' "/CODE_SIGN_STYLE = Manual;/a\\
-          \ \ \ \ DevelopmentTeam = \"$APPLE_TEAM_ID\";
-          " App.xcodeproj/project.pbxproj
-
-          # Injecte ou remplace PROVISIONING_PROFILE_SPECIFIER
-          sed -i '' "s/PROVISIONING_PROFILE_SPECIFIER = .*/PROVISIONING_PROFILE_SPECIFIER = \"$PROVISIONING_PROFILE_NAME\";/g" App.xcodeproj/project.pbxproj
-          grep -q "PROVISIONING_PROFILE_SPECIFIER = \"$PROVISIONING_PROFILE_NAME\";" App.xcodeproj/project.pbxproj || \
-          sed -i '' "/DevelopmentTeam = \"$APPLE_TEAM_ID\";/a\\
-          \ \ \ \ PROVISIONING_PROFILE_SPECIFIER = \"$PROVISIONING_PROFILE_NAME\";
-          " App.xcodeproj/project.pbxproj
-
-          # Injecte ou remplace CODE_SIGN_IDENTITY
-          sed -i '' 's/CODE_SIGN_IDENTITY = .*;/CODE_SIGN_IDENTITY = "Apple Distribution";/g' App.xcodeproj/project.pbxproj
-          grep -q 'CODE_SIGN_IDENTITY = "Apple Distribution";' App.xcodeproj/project.pbxproj || \
-          sed -i '' "/PROVISIONING_PROFILE_SPECIFIER = \"$PROVISIONING_PROFILE_NAME\";/a\\
-          \ \ \ \ CODE_SIGN_IDENTITY = \"Apple Distribution\";
-          " App.xcodeproj/project.pbxproj
+          APPLE_APPSTORECONNECT_API_KEY_ID: ${{ secrets.APPLE_APPSTORECONNECT_API_KEY_ID }}
+          APPLE_APPSTORECONNECT_API_ISSUER_ID: ${{ secrets.APPLE_APPSTORECONNECT_API_ISSUER_ID }}
+          APPLE_APPSTORECONNECT_API_KEY_P8_BASE64: ${{ secrets.APPLE_APPSTORECONNECT_API_KEY_P8_BASE64 }}
+          APP_NAME: "FlapiExampleApp"
+          IOS_APPLE_PROVISIONING_PROFILE_APPLEDISTRIBUTION_NAME: "FlapiExampleApp"
+          APP_VERSION: "1.0.0"
+          APP_IOSMACOS_IDENTIFIER: "com.example.flapiexampleapp"
+        run: fastlane create_new_app
 
       - name: Build with Capacitor - iOS
         if: ${{ matrix.platform == 'macos-15' }}
