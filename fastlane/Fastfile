@@ -58,7 +58,7 @@ lane :create_new_app do |options|
       extended_virtual_address_space: "off",     # Valid values: "on", "off"
       file_provider_testing_mode: "off",         # Valid values: "on", "off"
       fonts: "off",                              # Valid values: "on", "off"
-      game_center: "off",                       # Valid values: "ios", "macos", off"
+      game_center: "off",                        # Valid values: "ios", "macos", off"
       health_kit: "off",                         # Valid values: "on", "off"
       hls_interstitial_preview: "off",           # Valid values: "on", "off"
       home_kit: "off",                           # Valid values: "on", "off"
