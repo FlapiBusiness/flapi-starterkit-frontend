@@ -156,10 +156,10 @@ jobs:
           APPLE_APPSTORECONNECT_API_KEY_ID: ${{ secrets.APPLE_APPSTORECONNECT_API_KEY_ID }}
           APPLE_APPSTORECONNECT_API_ISSUER_ID: ${{ secrets.APPLE_APPSTORECONNECT_API_ISSUER_ID }}
           APPLE_APPSTORECONNECT_API_KEY_P8_BASE64: ${{ secrets.APPLE_APPSTORECONNECT_API_KEY_P8_BASE64 }}
-          APP_NAME: "FlapiExampleApp"
-          IOS_APPLE_PROVISIONING_PROFILE_APPLEDISTRIBUTION_NAME: "FlapiExampleApp"
-          APP_VERSION: "1.0.0"
-          APP_IOSMACOS_IDENTIFIER: "com.example.flapiexampleapp"
+          APP_NAME: 'FlapiExampleApp'
+          IOS_APPLE_PROVISIONING_PROFILE_APPLEDISTRIBUTION_NAME: 'FlapiExampleApp'
+          APP_VERSION: '1.0.0'
+          APP_IOSMACOS_IDENTIFIER: 'com.example.flapiexampleapp'
         run: fastlane create_new_app
 
       - name: Build with Capacitor - iOS
