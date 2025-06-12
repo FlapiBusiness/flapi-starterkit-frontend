@@ -24,9 +24,9 @@
       :component="childComponent"
     /> -->
   </div>
-  <div>
-    <!-- <FlapiComponentRenderer v-for="component in components" :key="component.order" :component="component" /> -->
-  </div>
+  <!-- <div>
+    <FlapiComponentRenderer v-for="component in components" :key="component.order" :component="component" />
+  </div> -->
 
   <div
     v-if="contextMenu.index !== null"
