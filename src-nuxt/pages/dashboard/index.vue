@@ -17,8 +17,17 @@
     ]"
   >
     <!-- @mouseleave="closeContextMenu" -->
-    <component :is="getComponentName(component.name)" v-bind="component.data" />
+    <component :is="getComponentName(component.name)" v-bind="component.data.props"> </component>
+    <!-- <FlapiComponentRenderer
+      v-for="(childComponent, childIndex) in slot.components"
+      :key="childComponent.name + '-' + childIndex"
+      :component="childComponent"
+    /> -->
   </div>
+  <div>
+    <!-- <FlapiComponentRenderer v-for="component in components" :key="component.order" :component="component" /> -->
+  </div>
+
   <div
     v-if="contextMenu.index !== null"
     :style="{ position: 'fixed', top: contextMenu.y + 'px', left: contextMenu.x + 'px', zIndex: 1000 }"
@@ -43,6 +52,7 @@
 import { useCmsComponentStore } from '~/stores/cmsComponentStore'
 import type { CmsComponentStore } from '~/stores/cmsComponentStore'
 import { getComponentName } from '@/components/sections/componentDisplayMap'
+// import FlapiComponentRenderer from '~/components/display/FlapiComponentRenderer.vue'
 
 import type { Ref } from 'vue'
 import { ref } from 'vue'
@@ -155,4 +165,71 @@ const closeContextMenu: () => void = (): void => {
   contextMenu.value.x = 0
   contextMenu.value.y = 0
 }
+
+// TODO: Remove this when the components are recursively
+// const components: Ref<CmsComponentStore[]> = ref([
+//   {
+//     name: 'FlapiBadge',
+//     order: 1,
+//     data: {
+//       name: 'FlapiBadge',
+//       description: 'A badge component',
+//       category: 'UI',
+//       props: {
+//         backgroundColor: '#D6D0FB',
+//         textColor: '#fff',
+//         size: 'md',
+//       },
+//       slots: [{ name: 'default' }],
+//     },
+//     components: [
+//       {
+//         name: 'FlapiBadge',
+//         order: 2,
+//         data: {
+//           name: 'FlapiBadge',
+//           description: 'A badge component',
+//           category: 'UI',
+//           props: {
+//             backgroundColor: '#f00',
+//             textColor: '#fff',
+//           },
+//           slots: [{ name: 'default' }],
+//         },
+//         components: [
+//           {
+//             name: 'FlapiBadge',
+//             order: 3,
+//             data: {
+//               name: 'FlapiBadge',
+//               description: 'A badge component',
+//               category: 'UI',
+//               props: {
+//                 backgroundColor: '#0f0',
+//                 textColor: '#000',
+//               },
+//               slots: [{ name: 'default' }],
+//             },
+//             components: [
+//               {
+//                 name: 'FlapiBadge',
+//                 order: 4,
+//                 data: {
+//                   name: 'FlapiBadge',
+//                   description: 'A badge component',
+//                   category: 'UI',
+//                   props: {
+//                     backgroundColor: '#00f',
+//                     textColor: '#fff',
+//                   },
+//                   slots: [{ name: 'default' }],
+//                 },
+//               },
+//             ],
+//           },
+//         ],
+//       },
+//     ],
+//   },
+// ])
 </script>

@@ -11,7 +11,7 @@ import type { FlapiEvent, FlapiSlot } from '~/composables/type/FlapiCmsComponent
  * @property {FlapiSlot[]} [slots] - An optional array of slots that the component can use.
  * @property {FlapiEvent[]} [events] - An optional array of events that the component can emit.
  */
-export type CmsComponent = {
+export type CmsComponentSkeleton = {
   name: string
   description: string
   props?: Record<string, any>
