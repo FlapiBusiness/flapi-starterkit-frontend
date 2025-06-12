@@ -73,6 +73,8 @@ jobs:
       - name: Commit changes
         run: |
           git fetch origin
+          git checkout develop
+          git pull --rebase origin develop
           git add .
           git commit -m "feat: update files with ${{ inputs.customerName }}-${{ inputs.projectName }}"
           git push origin develop
